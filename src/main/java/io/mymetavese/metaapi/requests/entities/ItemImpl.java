@@ -19,16 +19,16 @@ public class ItemImpl implements Item {
     private final API api;
 
     @Getter
-    private String tokenId;
+    private final String tokenId;
 
     @Getter
-    private boolean isNFT;
+    private final boolean isNFT;
 
     @Getter
-    private List<String> tokenIndexes;
+    private final List<String> tokenIndexes;
 
     @Getter
-    private int amount;
+    private final int amount;
 
     public ItemImpl(API api, String tokenId, boolean isNFT, List<String> tokenIndexes, int amount) {
         this.api = api;

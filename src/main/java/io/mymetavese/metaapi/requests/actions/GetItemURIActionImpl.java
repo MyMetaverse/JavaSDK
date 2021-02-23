@@ -1,13 +1,10 @@
 package io.mymetavese.metaapi.requests.actions;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import io.mymetavese.metaapi.API;
-import io.mymetavese.metaapi.api.RestAction;
 import io.mymetavese.metaapi.api.actions.GetItemURIAction;
-import io.mymetavese.metaapi.api.entities.Error;
 import io.mymetavese.metaapi.api.entities.Item;
 import io.mymetavese.metaapi.api.entities.ItemURI;
 import io.mymetavese.metaapi.requests.RestActionImpl;
@@ -16,8 +13,6 @@ import io.mymetavese.metaapi.requests.entities.ItemURIImpl;
 import okhttp3.Response;
 
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 public class GetItemURIActionImpl extends RestActionImpl<ItemURI> implements GetItemURIAction {
 
@@ -25,6 +20,7 @@ public class GetItemURIActionImpl extends RestActionImpl<ItemURI> implements Get
 
     public GetItemURIActionImpl(API api, Item item) {
         super(api, Route.EnjinX.GET_TOKEN_URI);
+        // TODO: Add the query to the request body.
         this.item = item;
     }
 
