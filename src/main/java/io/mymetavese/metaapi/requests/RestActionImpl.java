@@ -1,6 +1,7 @@
 package io.mymetavese.metaapi.requests;
 
 import com.google.gson.Gson;
+import io.mymetavese.metaapi.API;
 import io.mymetavese.metaapi.MetaAPI;
 import io.mymetavese.metaapi.api.RestAction;
 import io.mymetavese.metaapi.api.entities.Error;
@@ -15,7 +16,7 @@ import java.util.function.Consumer;
 
 public abstract class RestActionImpl<T> extends Transformable<T> implements RestAction<T> {
 
-    private final MetaAPI api;
+    private final API api;
 
     protected final Route route;
 
@@ -23,7 +24,7 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     private Map<String, String> extraHeaders;
 
-    public RestActionImpl(MetaAPI api, Route route) {
+    public RestActionImpl(API api, Route route) {
         this.route = route;
         this.api = api;
         this.requestBody = buildBody(JsonObject.JsonObjectBuilder.newBuilder().create());
@@ -68,5 +69,6 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
     public T complete() {
         return null;
     }
+
 }
 

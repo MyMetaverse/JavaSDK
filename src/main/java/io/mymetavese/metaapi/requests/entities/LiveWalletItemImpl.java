@@ -1,6 +1,7 @@
 package io.mymetavese.metaapi.requests.entities;
 
 import com.google.gson.annotations.SerializedName;
+import io.mymetavese.metaapi.api.actions.GetItemURIAction;
 import io.mymetavese.metaapi.api.entities.LiveWalletItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,10 @@ public class LiveWalletItemImpl implements LiveWalletItem {
                 ", amount=" + amount +
                 ", locked=" + locked +
                 '}';
+    }
+
+    @Override
+    public GetItemURIAction getItemURI() {
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package io.mymetavese.metaapi.requests;
 
 import lombok.Getter;
+import sun.security.acl.AllPermissionsImpl;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -20,6 +21,15 @@ public class Route {
         public static final Route SEND_TRADE_REQUEST = new Route(POST, "/LiveWallet/Trade/SendTradeRequest");
         public static final Route GET_ETH_ADDRESS = new Route(GET, "/LiveWallet/GetEthAddress/{PlayerID}");
         public static final Route GET_ITEMS = new Route(GET, "/LiveWallet/GetItems/{PlayerID}");
+    }
+
+    public static class MetaData {
+        public static final Route EDIT_TOKEN = new Route(POST, "/api/Metadata/EditToken/{internalID}/{tokenIndex}");
+        public static final Route UPDATE_TOKEN_ACHIEVEMENTS = new Route(POST, "/api/Metadata/UpdateTokenAchievements/{internalID}/{tokenIndex}");
+    }
+
+    public static class EnjinX {
+        public static final Route GET_TOKEN_URI = new Route(GET, "https://cloud.enjin.io/graphql");
     }
 
     @Getter
@@ -52,7 +62,7 @@ public class Route {
         if(args.length < arguments) {
             throw new IllegalArgumentException("You are missing some arguments in this route.");
         }
-        String fullRoute = API_ROUTE + route;
+        String fullRoute = !route.startsWith("/") ? route : API_ROUTE + route;
 
         return compileNextArgument(fullRoute, args);
     }

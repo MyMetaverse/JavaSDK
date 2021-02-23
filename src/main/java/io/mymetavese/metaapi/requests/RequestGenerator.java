@@ -1,5 +1,6 @@
 package io.mymetavese.metaapi.requests;
 
+import io.mymetavese.metaapi.API;
 import io.mymetavese.metaapi.MetaAPI;
 import okhttp3.*;
 import okhttp3.internal.http.HttpMethod;
@@ -13,9 +14,9 @@ public class RequestGenerator {
     private static final MediaType MEDIA_TYPE_JSON  = MediaType.parse("application/json; charset=utf-8");
 
     private final OkHttpClient httpClient;
-    private final MetaAPI api;
+    private final API api;
 
-    public RequestGenerator(MetaAPI api, OkHttpClient okHttpClient) {
+    public RequestGenerator(API api, OkHttpClient okHttpClient) {
         this.httpClient = okHttpClient;
         this.api = api;
     }
@@ -55,10 +56,6 @@ public class RequestGenerator {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-
-
-
 
     }
 
