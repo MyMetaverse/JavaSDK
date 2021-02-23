@@ -13,4 +13,11 @@ public class EnjinWalletImpl implements EnjinWallet {
     @Getter
     private List<EnjinWalletItemImpl> items;
 
+    @Override
+    public String toString() {
+        return "EnjinWalletImpl{" +
+                "address='" + address + '\'' +
+                ", items=" + items +
+                '}';
+    }
 }

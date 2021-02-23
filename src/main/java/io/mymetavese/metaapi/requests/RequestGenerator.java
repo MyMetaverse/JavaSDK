@@ -27,11 +27,14 @@ public class RequestGenerator {
         builder.url(route);
 
         String method = request.getMethod().toString();
-        RequestBody body = request.getRequestBody();
+        JsonObject bodyObject = request.getRequestBody();
 
-        if (body == null && HttpMethod.requiresRequestBody(method)) {
+        RequestBody body = null;
+
+        if (bodyObject == null && HttpMethod.requiresRequestBody(method))
             body = EMPTY_BODY;
-        }
+        else if(bodyObject != null)
+            body = RequestBody.create(MEDIA_TYPE_JSON, bodyObject.toJson());
 
         builder.method(method, body)
                 .header("user-agent", USER_AGENT)

@@ -1,12 +1,15 @@
 package io.mymetavese.metaapi.requests;
 
+import com.google.gson.Gson;
 import io.mymetavese.metaapi.MetaAPI;
 import io.mymetavese.metaapi.api.RestAction;
-import okhttp3.RequestBody;
+import io.mymetavese.metaapi.api.entities.Error;
+import io.mymetavese.metaapi.requests.entities.ErrorImpl;
 import okhttp3.Response;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -16,21 +19,23 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     protected final Route route;
 
-    private final RequestBody requestBody;
+    private final JsonObject requestBody;
 
     private Map<String, String> extraHeaders;
 
     public RestActionImpl(MetaAPI api, Route route) {
-        this(api, route, null);
+        this.route = route;
+        this.api = api;
+        this.requestBody = buildBody(JsonObject.JsonObjectBuilder.newBuilder().create());
     }
 
-    public RestActionImpl(MetaAPI api, Route route, RequestBody requestBody) {
-       this.route = route;
-       this.requestBody = requestBody;
-       this.api = api;
+    protected String compileRoute() {
+        return route.compileRoute();
     }
 
-    protected abstract String compileRoute();
+    protected JsonObject buildBody(JsonObject body) {
+        return null;
+    }
 
     public void addHeader(String header, String data) {
         if(extraHeaders == null)
@@ -44,7 +49,8 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
     }
 
     public void handleFailure(Request<T> request, Response badResponse) {
-        request.onFailure(badResponse);
+        Gson gson = new Gson();
+        request.onFailure(new ErrorImpl(badResponse.code(), gson.fromJson(Objects.requireNonNull(badResponse.body()).charStream(), ErrorImpl.class).getMessage()));
     }
 
     @Override
@@ -53,7 +59,7 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
     }
 
     @Override
-    public void queue(Consumer<? super T> success, Consumer<Response> failure) {
+    public void queue(Consumer<? super T> success, Consumer<Error> failure) {
         Request<T> request = new Request<>(this, compileRoute(), route, requestBody, extraHeaders, success, failure);
         api.getRequestGenerator().request(request); // TODO: Change this to a general created obj
     }

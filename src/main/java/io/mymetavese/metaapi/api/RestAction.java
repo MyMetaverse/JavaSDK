@@ -1,6 +1,6 @@
 package io.mymetavese.metaapi.api;
 
-import okhttp3.Response;
+import io.mymetavese.metaapi.api.entities.Error;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
@@ -20,7 +20,7 @@ public interface RestAction<T> {
      * @param success The success callback from the request.
      * @param failure The callback error from the request.
      */
-    void queue(Consumer<? super T> success, Consumer<Response> failure);
+    void queue(Consumer<? super T> success, Consumer<Error> failure);
 
     /**
      * Submits a Request but in synchronous logic.

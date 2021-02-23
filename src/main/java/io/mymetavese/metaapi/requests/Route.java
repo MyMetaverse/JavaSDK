@@ -7,13 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static io.mymetavese.metaapi.requests.Method.GET;
+import static io.mymetavese.metaapi.requests.Method.POST;
 
 public class Route {
 
     private static final String API_ROUTE = "https://livewallet.mymetaverse.io";
 
     public static class LiveWallet {
-        public static final Route LINK_PLAYER = new Route(GET, "/LiveWallet/GetItems/{PlayerID}");
+        public static final Route LINK_PLAYER = new Route(POST, "/LiveWallet/LinkPlayer");
+        public static final Route DEPOSIT = new Route(POST, "/LiveWallet/Deposit");
+        public static final Route GET_TRADEABLE_ITEMS = new Route(GET, "/LiveWallet/Trade/GetTradeableItems/{InitiatorPlayerID}&{ReceiverPlayerID}");
+        public static final Route SEND_TRADE_REQUEST = new Route(POST, "/LiveWallet/Trade/SendTradeRequest");
         public static final Route GET_ETH_ADDRESS = new Route(GET, "/LiveWallet/GetEthAddress/{PlayerID}");
         public static final Route GET_ITEMS = new Route(GET, "/LiveWallet/GetItems/{PlayerID}");
     }
@@ -45,15 +49,15 @@ public class Route {
     }
 
     public String compileRoute(String... args) {
-        if(args.length != arguments) {
-            throw new IllegalArgumentException("You are missing some arguments.");
+        if(args.length < arguments) {
+            throw new IllegalArgumentException("You are missing some arguments in this route.");
         }
         String fullRoute = API_ROUTE + route;
 
         return compileNextArgument(fullRoute, args);
     }
 
-    private static final String pattern = "((\\{)(.*)(}))";
+    private static final String pattern = "((\\{)(.+?)(}))";
     private static final Pattern regex = Pattern.compile(pattern);
 
     private int findArguments(String str) {
