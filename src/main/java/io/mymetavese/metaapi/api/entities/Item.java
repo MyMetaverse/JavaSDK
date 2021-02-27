@@ -1,5 +1,7 @@
 package io.mymetavese.metaapi.api.entities;
 
+import io.mymetavese.metaapi.requests.entities.ItemIndex;
+
 import java.util.List;
 
 public interface Item {
@@ -8,7 +10,7 @@ public interface Item {
 
     boolean isNFT();
 
-    List<String> getTokenIndexes();
+    List<ItemIndex> getTokenIndexes();
 
     int getAmount();
 

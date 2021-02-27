@@ -1,6 +1,6 @@
 package io.mymetavese.metaapi.requests.actions;
 
-import io.mymetavese.metaapi.MetaAPI;
+import io.mymetavese.metaapi.MetaAPIImpl;
 import io.mymetavese.metaapi.api.actions.TradeRequestAction;
 import io.mymetavese.metaapi.api.entities.Player;
 import io.mymetavese.metaapi.api.entities.TradeRequest;
@@ -20,7 +20,7 @@ public class TradeRequestActionImpl extends RestActionImpl<TradeRequest> impleme
     private final List<LiveWalletItemImpl> itemsToOffer;
     private final List<LiveWalletItemImpl> itemsToAsk;
 
-    public TradeRequestActionImpl(MetaAPI api, Player player, Player targetPlayer, List<LiveWalletItemImpl> itemsToOffer, List<LiveWalletItemImpl> itemsToAsk) {
+    public TradeRequestActionImpl(MetaAPIImpl api, Player player, Player targetPlayer, List<LiveWalletItemImpl> itemsToOffer, List<LiveWalletItemImpl> itemsToAsk) {
         super(api, Route.LiveWallet.SEND_TRADE_REQUEST);
         this.player = player;
         this.targetPlayer = targetPlayer;

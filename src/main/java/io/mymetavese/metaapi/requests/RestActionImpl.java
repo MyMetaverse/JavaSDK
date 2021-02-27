@@ -1,10 +1,12 @@
 package io.mymetavese.metaapi.requests;
 
 import com.google.gson.Gson;
-import io.mymetavese.metaapi.MetaAPI;
+import io.mymetavese.metaapi.FutureRestAction;
+import io.mymetavese.metaapi.MetaAPIImpl;
+import io.mymetavese.metaapi.api.MetaAPI;
+import io.mymetavese.metaapi.api.RequestError;
 import io.mymetavese.metaapi.api.RestAction;
-import io.mymetavese.metaapi.api.entities.Error;
-import io.mymetavese.metaapi.requests.entities.ErrorImpl;
+import lombok.Getter;
 import okhttp3.Response;
 
 import java.util.HashMap;
@@ -15,18 +17,26 @@ import java.util.function.Consumer;
 
 public abstract class RestActionImpl<T> extends Transformable<T> implements RestAction<T> {
 
-    private final MetaAPI api;
+    @Getter
+    private final MetaAPI metaAPI;
 
     protected final Route route;
 
-    private final JsonObject requestBody;
+    protected final JsonObject requestBody;
+
+    private final Class<? extends T> classToTransform;
 
     private Map<String, String> extraHeaders;
 
     public RestActionImpl(MetaAPI api, Route route) {
+        this(api, route, null);
+    }
+
+    public RestActionImpl(MetaAPI api, Route route, Class<? extends T> classToTransform) {
         this.route = route;
-        this.api = api;
+        this.metaAPI = api;
         this.requestBody = buildBody(JsonObject.JsonObjectBuilder.newBuilder().create());
+        this.classToTransform = classToTransform;
     }
 
     protected String compileRoute() {
@@ -50,23 +60,34 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     public void handleFailure(Request<T> request, Response badResponse) {
         Gson gson = new Gson();
-        request.onFailure(new ErrorImpl(badResponse.code(), gson.fromJson(Objects.requireNonNull(badResponse.body()).charStream(), ErrorImpl.class).getMessage()));
+        request.onFailure(new RequestError(badResponse.code(), gson.fromJson(Objects.requireNonNull(badResponse.body()).charStream(), RequestError.class).getMessage()));
+    }
+
+    @Override
+    public T transform(Response response) {
+        if(classToTransform == null)
+            throw new NullPointerException("Class to transform cannot be null.");
+
+        if (response == null || response.body() == null)
+            throw new NullPointerException("Response cannot be null");
+
+        return Utils.transformElement(response, classToTransform, metaAPI);
     }
 
     @Override
     public CompletableFuture<T> submit() {
-        return null;
+        return new FutureRestAction<>(metaAPI, this, compileRoute(), route, requestBody, extraHeaders);
     }
 
     @Override
-    public void queue(Consumer<? super T> success, Consumer<Error> failure) {
+    public void queue(Consumer<? super T> success, Consumer<? super RequestError> failure) {
         Request<T> request = new Request<>(this, compileRoute(), route, requestBody, extraHeaders, success, failure);
-        api.getRequestGenerator().request(request); // TODO: Change this to a general created obj
+        ((MetaAPIImpl) metaAPI).getRequestGenerator().asyncRequest(request);
     }
 
     @Override
     public T complete() {
-        return null;
+        return submit().join();
     }
 }
 

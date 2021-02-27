@@ -1,14 +1,13 @@
 package io.mymetavese.metaapi.requests.actions;
 
 import com.google.gson.Gson;
-import io.mymetavese.metaapi.MetaAPI;
+import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.GetTradeableItems;
 import io.mymetavese.metaapi.api.entities.Player;
 import io.mymetavese.metaapi.api.entities.TradeableItemsList;
 import io.mymetavese.metaapi.requests.RestActionImpl;
 import io.mymetavese.metaapi.requests.Route;
 import io.mymetavese.metaapi.requests.entities.TradeableItemsListImpl;
-import lombok.SneakyThrows;
 import okhttp3.Response;
 
 import java.util.Objects;
@@ -20,7 +19,7 @@ public class GetTradeableItemsImpl extends RestActionImpl<TradeableItemsList> im
     private final Player receiverPlayer;
 
     public GetTradeableItemsImpl(MetaAPI api, Player initiatorPlayer, Player receiverPlayer) {
-        super(api, Route.LiveWallet.GET_TRADEABLE_ITEMS);
+        super(api, Route.LiveWallet.GET_TRADEABLE_ITEMS, TradeableItemsListImpl.class);
         this.initiatorPlayer = initiatorPlayer;
         this.receiverPlayer = receiverPlayer;
     }

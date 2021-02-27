@@ -1,35 +1,39 @@
 package io.mymetavese.metaapi.requests.entities;
 
-import com.google.gson.annotations.SerializedName;
+import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.entities.EnjinWalletItem;
+import io.mymetavese.metaapi.requests.ApiImplementation;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-public class EnjinWalletItemImpl implements EnjinWalletItem {
+@RequiredArgsConstructor
+public class EnjinWalletItemImpl implements EnjinWalletItem, ApiImplementation  {
 
     @Getter
-    @SerializedName("token_id")
-    private String tokenId;
+    @Setter
+    private MetaAPI metaAPI;
 
     @Getter
-    @SerializedName("token_indexes")
-    private List<String> tokenIndexes;
+    private final String tokenId;
 
     @Getter
-    private boolean NFT;
+    private final List<ItemIndex> tokenIndexes;
 
     @Getter
-    private int amount;
+    private final boolean NFT;
 
     @Getter
-    private List<Object> locked;
+    private final int amount;
 
     @Getter
-    private String name;
+    private final String name;
 
     @Getter
-    private String itemURI;
+    private final String itemURI;
 
     @Override
     public String toString() {
@@ -38,7 +42,6 @@ public class EnjinWalletItemImpl implements EnjinWalletItem {
                 ", tokenIndexes=" + tokenIndexes +
                 ", NFT=" + NFT +
                 ", amount=" + amount +
-                ", locked=" + locked +
                 ", name='" + name + '\'' +
                 ", itemURI='" + itemURI + '\'' +
                 '}';

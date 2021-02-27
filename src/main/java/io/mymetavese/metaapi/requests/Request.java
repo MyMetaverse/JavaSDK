@@ -1,6 +1,6 @@
 package io.mymetavese.metaapi.requests;
 
-import io.mymetavese.metaapi.api.entities.Error;
+import io.mymetavese.metaapi.api.RequestError;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import okhttp3.Response;
@@ -19,7 +19,7 @@ public class Request<T> {
     private final Map<String, String> headers;
 
     private final Consumer<? super T> success;
-    private final Consumer<Error> failure;
+    private final Consumer<? super RequestError> failure;
 
     public String getCompiledRoute() {
         return url;
@@ -33,7 +33,7 @@ public class Request<T> {
         success.accept(t);
     }
 
-    public void onFailure(Error response) {
+    public void onFailure(RequestError response) {
        failure.accept(response);
     }
 

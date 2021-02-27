@@ -22,6 +22,11 @@ public class Route {
         public static final Route GET_ITEMS = new Route(GET, "/LiveWallet/GetItems/{PlayerID}");
     }
 
+    public static class MetaData {
+        public static final Route EditToken = new Route(POST, "/api/Metadata/EditToken/{id}/{index}");
+        public static final Route UpdateTokenAchievements = new Route(POST, "/api/Metadata/UpdateTokenAchievementsAction/{id}/{index}");
+    }
+
     @Getter
     private final Method method;
 
