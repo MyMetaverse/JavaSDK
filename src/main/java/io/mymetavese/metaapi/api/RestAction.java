@@ -1,11 +1,11 @@
 package io.mymetavese.metaapi.api;
 
-import io.mymetavese.metaapi.api.entities.Error;
-
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public interface RestAction<T> {
+
+    MetaAPI getMetaAPI();
 
     /**
      * Submits a Request and provides the representation of the task in a {@link CompletableFuture}
@@ -20,7 +20,7 @@ public interface RestAction<T> {
      * @param success The success callback from the request.
      * @param failure The callback error from the request.
      */
-    void queue(Consumer<? super T> success, Consumer<Error> failure);
+    void queue(Consumer<? super T> success, Consumer<? super RequestError> failure);
 
     /**
      * Submits a Request but in synchronous logic.

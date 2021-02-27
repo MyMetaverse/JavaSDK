@@ -2,7 +2,8 @@ package io.mymetavese.metaapi.requests.actions;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import io.mymetavese.metaapi.MetaAPI;
+import io.mymetavese.metaapi.MetaAPIImpl;
+import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.EthAddressAction;
 import io.mymetavese.metaapi.api.entities.Player;
 import io.mymetavese.metaapi.requests.RestActionImpl;

@@ -1,22 +1,25 @@
 package io.mymetavese.metaapi.requests.entities;
 
-import com.google.gson.annotations.SerializedName;
+import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.entities.LiveWalletItem;
+import io.mymetavese.metaapi.requests.ApiImplementation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public class LiveWalletItemImpl implements LiveWalletItem {
+public class LiveWalletItemImpl implements LiveWalletItem, ApiImplementation {
+
+    @Getter @Setter
+    private MetaAPI metaAPI;
 
     @Getter
-    @SerializedName("token_id")
     private final String tokenId;
 
     @Getter
-    @SerializedName("token_indexes")
-    private final List<String> tokenIndexes;
+    private final List<ItemIndex> tokenIndexes;
 
     @Getter
     private final boolean NFT;

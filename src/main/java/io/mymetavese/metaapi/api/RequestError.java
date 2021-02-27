@@ -1,18 +1,16 @@
-package io.mymetavese.metaapi.requests.entities;
+package io.mymetavese.metaapi.api;
 
-import io.mymetavese.metaapi.api.entities.Error;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class ErrorImpl implements Error {
+public class RequestError extends Throwable {
 
     private final int code;
 
     @Getter
     private final String error;
 
-    @Override
     public int code() {
         return code;
     }
@@ -24,7 +22,7 @@ public class ErrorImpl implements Error {
 
     @Override
     public String toString() {
-        return "ErrorImpl{" +
+        return "RequestError{" +
                 "code=" + code +
                 ", error='" + error + '\'' +
                 '}';
