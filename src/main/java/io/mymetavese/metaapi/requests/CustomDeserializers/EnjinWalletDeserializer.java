@@ -30,8 +30,9 @@ public class EnjinWalletDeserializer implements JsonDeserializer<List<EnjinWalle
                     jsonObject.get("NFT").getAsBoolean(),
                     jsonObject.get("amount").getAsInt(),
                     jsonObject.get("name").getAsString(),
-                    jsonObject.get("name").getAsString()
+                    jsonObject.has("itemURI") ? jsonObject.get("itemURI").getAsString() : null
             );
+            System.out.println(jsonObject);
 
             enjinWalletItems.add(enjinWalletItem);
         }

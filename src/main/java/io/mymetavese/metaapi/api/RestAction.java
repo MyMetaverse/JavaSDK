@@ -1,6 +1,7 @@
 package io.mymetavese.metaapi.api;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public interface RestAction<T> {
@@ -28,5 +29,9 @@ public interface RestAction<T> {
      * @return The response of the Request.
      */
     T complete();
+
+    default void queueAfter(long time, TimeUnit timeUnit, Consumer<? super T> success, Consumer<? super RequestError> failure) {
+
+    }
 
 }

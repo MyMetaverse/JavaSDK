@@ -30,7 +30,7 @@ public class MetaAPIImpl implements MetaAPI {
     @Getter
     private final OkHttpClient client;
 
-    private MetaAPIImpl(String token) {
+    public MetaAPIImpl(String token) {
         this.token = token;
 
         client = new OkHttpClient();
@@ -48,23 +48,4 @@ public class MetaAPIImpl implements MetaAPI {
         return new TokenImpl(this, id, index);
     }
 
-    public static final class Builder {
-        private String token;
-
-        private Builder() {
-        }
-
-        public static Builder aMetaAPI() {
-            return new Builder();
-        }
-
-        public Builder withToken(String token) {
-            this.token = token;
-            return this;
-        }
-
-        public MetaAPIImpl build() {
-            return new MetaAPIImpl(token);
-        }
-    }
 }

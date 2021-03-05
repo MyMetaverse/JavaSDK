@@ -1,9 +1,9 @@
 package io.mymetavese.metaapi.requests.entities;
 
+import com.google.gson.annotations.SerializedName;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.entities.EnjinWalletItem;
 import io.mymetavese.metaapi.requests.ApiImplementation;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -33,6 +33,7 @@ public class EnjinWalletItemImpl implements EnjinWalletItem, ApiImplementation  
     private final String name;
 
     @Getter
+    @SerializedName("ItemURI")
     private final String itemURI;
 
     @Override
