@@ -1,10 +1,10 @@
 package io.mymetavese.metaapi;
 
 import io.mymetavese.metaapi.api.MetaAPI;
-import io.mymetavese.metaapi.api.entities.Player;
+import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.Token;
 import io.mymetavese.metaapi.requests.RequestGenerator;
-import io.mymetavese.metaapi.requests.entities.PlayerImpl;
+import io.mymetavese.metaapi.requests.entities.GameEntityImpl;
 import io.mymetavese.metaapi.requests.entities.TokenImpl;
 import lombok.Getter;
 import okhttp3.OkHttpClient;
@@ -39,13 +39,13 @@ public class MetaAPIImpl implements MetaAPI {
         this.scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     }
 
-    public Player buildPlayer(String playerID) {
-        return new PlayerImpl(this, playerID);
+    public GameEntity buildPlayer(String playerID) {
+        return new GameEntityImpl(this, playerID);
     }
 
     @Override
     public Token buildToken(String id, String index) {
-        return new TokenImpl(this, id, index);
+        return new TokenImpl(this, id, index, 0);
     }
 
 }

@@ -23,7 +23,7 @@ public class LiveWalletDeserializer implements JsonDeserializer<List<LiveWalletI
 
             if(jsonObject.has("token_indexes"))
                 for (JsonElement token_indexes : jsonObject.getAsJsonArray("token_indexes"))
-                    itemIndices.add(new ItemIndex(token_indexes.getAsString()));
+                    itemIndices.add(new ItemIndex(null, token_indexes.getAsString()));
 
             JsonElement lockedAsJson = jsonObject.get("locked");
             if (lockedAsJson.isJsonArray()) {
@@ -34,6 +34,7 @@ public class LiveWalletDeserializer implements JsonDeserializer<List<LiveWalletI
             }
 
             LiveWalletItemImpl liveWalletItem = new LiveWalletItemImpl(
+                    null,
                     jsonObject.get("token_id").getAsString(),
                     itemIndices,
                     jsonObject.get("NFT").getAsBoolean(),

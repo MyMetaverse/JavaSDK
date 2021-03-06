@@ -2,7 +2,7 @@ package io.mymetavese.metaapi.requests.actions;
 
 import io.mymetavese.metaapi.MetaAPIImpl;
 import io.mymetavese.metaapi.api.actions.TradeRequestAction;
-import io.mymetavese.metaapi.api.entities.Player;
+import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.TradeRequest;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
@@ -15,28 +15,28 @@ import java.util.List;
 
 public class TradeRequestActionImpl extends RestActionImpl<TradeRequest> implements TradeRequestAction {
 
-    private final Player player;
-    private final Player targetPlayer;
+    private final GameEntity gameEntity;
+    private final GameEntity targetGameEntity;
     private final List<LiveWalletItemImpl> itemsToOffer;
     private final List<LiveWalletItemImpl> itemsToAsk;
 
-    public TradeRequestActionImpl(MetaAPIImpl api, Player player, Player targetPlayer, List<LiveWalletItemImpl> itemsToOffer, List<LiveWalletItemImpl> itemsToAsk) {
+    public TradeRequestActionImpl(MetaAPIImpl api, GameEntity gameEntity, GameEntity targetGameEntity, List<LiveWalletItemImpl> itemsToOffer, List<LiveWalletItemImpl> itemsToAsk) {
         super(api, Route.LiveWallet.SEND_TRADE_REQUEST);
-        this.player = player;
-        this.targetPlayer = targetPlayer;
+        this.gameEntity = gameEntity;
+        this.targetGameEntity = targetGameEntity;
         this.itemsToOffer = itemsToOffer;
         this.itemsToAsk = itemsToAsk;
     }
 
     @Override
     protected String compileRoute() {
-        return route.compileRoute(targetPlayer.getPlayerID());
+        return route.compileRoute(targetGameEntity.getPlayerID());
     }
 
     @Override
     protected JsonObject buildBody(JsonObject body) {
-        body.append("InitiatorPlayerID", player.getPlayerID());
-        body.append("ReceiverPlayerID", targetPlayer.getPlayerID());
+        body.append("InitiatorPlayerID", gameEntity.getPlayerID());
+        body.append("ReceiverPlayerID", targetGameEntity.getPlayerID());
         body.append("ItemsToOffer", itemsToOffer);
         body.append("ItemsToAsk", itemsToAsk);
 

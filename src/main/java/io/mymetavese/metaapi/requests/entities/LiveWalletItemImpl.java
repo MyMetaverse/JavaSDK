@@ -2,18 +2,16 @@ package io.mymetavese.metaapi.requests.entities;
 
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.entities.LiveWalletItem;
-import io.mymetavese.metaapi.requests.ApiImplementation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public class LiveWalletItemImpl implements LiveWalletItem, ApiImplementation {
+public class LiveWalletItemImpl implements LiveWalletItem {
 
-    @Getter @Setter
-    private MetaAPI metaAPI;
+    @Getter
+    private final MetaAPI metaAPI;
 
     @Getter
     private final String tokenId;

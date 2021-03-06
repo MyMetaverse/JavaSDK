@@ -60,7 +60,8 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     public void handleFailure(Request<T> request, Response badResponse) {
         Gson gson = new Gson();
-        request.onFailure(new RequestError(badResponse.code(), gson.fromJson(Objects.requireNonNull(badResponse.body()).charStream(), RequestError.class).getMessage()));
+        RequestError requestError = gson.fromJson(Objects.requireNonNull(badResponse.body()).charStream(), RequestError.class);
+        request.onFailure(requestError);
     }
 
     @Override

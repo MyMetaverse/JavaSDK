@@ -3,7 +3,7 @@ package io.mymetavese.metaapi.requests.actions;
 import com.google.gson.Gson;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.GetTradeableItems;
-import io.mymetavese.metaapi.api.entities.Player;
+import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.TradeableItemsList;
 import io.mymetavese.metaapi.requests.RestActionImpl;
 import io.mymetavese.metaapi.requests.Route;
@@ -14,19 +14,19 @@ import java.util.Objects;
 
 public class GetTradeableItemsImpl extends RestActionImpl<TradeableItemsList> implements GetTradeableItems {
 
-    private final Player initiatorPlayer;
+    private final GameEntity initiatorGameEntity;
 
-    private final Player receiverPlayer;
+    private final GameEntity receiverGameEntity;
 
-    public GetTradeableItemsImpl(MetaAPI api, Player initiatorPlayer, Player receiverPlayer) {
+    public GetTradeableItemsImpl(MetaAPI api, GameEntity initiatorGameEntity, GameEntity receiverGameEntity) {
         super(api, Route.LiveWallet.GET_TRADEABLE_ITEMS, TradeableItemsListImpl.class);
-        this.initiatorPlayer = initiatorPlayer;
-        this.receiverPlayer = receiverPlayer;
+        this.initiatorGameEntity = initiatorGameEntity;
+        this.receiverGameEntity = receiverGameEntity;
     }
 
     @Override
     protected String compileRoute() {
-        return route.compileRoute(initiatorPlayer.getPlayerID(), receiverPlayer.getPlayerID());
+        return route.compileRoute(initiatorGameEntity.getPlayerID(), receiverGameEntity.getPlayerID());
     }
 
     @Override

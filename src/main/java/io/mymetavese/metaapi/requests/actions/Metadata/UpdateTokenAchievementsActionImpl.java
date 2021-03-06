@@ -18,7 +18,7 @@ public class UpdateTokenAchievementsActionImpl extends RestActionImpl<Message> i
     private final List<TokenAchievementImpl> tokenAchievementList;
 
     public UpdateTokenAchievementsActionImpl(MetaAPI api) {
-        super(api, Route.MetaData.UpdateTokenAchievements, MessageImpl.class);
+        super(api, Route.MetaData.UPDATE_TOKEN_ACHIEVEMENTS, MessageImpl.class);
         this.tokenAchievementList = new ArrayList<>();
     }
 

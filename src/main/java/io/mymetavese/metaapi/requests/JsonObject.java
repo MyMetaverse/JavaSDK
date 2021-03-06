@@ -47,8 +47,7 @@ public class JsonObject {
     }
 
     public static final class JsonObjectBuilder {
-        private JsonObjectBuilder() {
-        }
+        private JsonObjectBuilder() { }
 
         public static JsonObjectBuilder newBuilder() {
             return new JsonObjectBuilder();

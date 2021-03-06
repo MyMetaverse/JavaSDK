@@ -19,6 +19,8 @@ public interface PlayerWallet {
      * @return Return true if the account is linked to any Enjin Wallet
      */
     default boolean isEnjinLinked() {
+        if(getEnjinWallet() == null)
+            return false;
         return getEnjinWallet().isLinked();
     }
 

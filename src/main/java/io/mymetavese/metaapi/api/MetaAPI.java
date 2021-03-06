@@ -1,13 +1,24 @@
 package io.mymetavese.metaapi.api;
 
 import io.mymetavese.metaapi.MetaAPIImpl;
-import io.mymetavese.metaapi.api.entities.Player;
+import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.Token;
 
 public interface MetaAPI {
 
-    Player buildPlayer(String playerID);
+    /**
+     * Build a new player ready to execute actions..
+     * @param playerID The player ID that the player should use.
+     * @return A player with their possible actions.
+     */
+    GameEntity buildPlayer(String playerID);
 
+    /**
+     * Build a new token ready to execute actions.
+     * @param id The ID of this token.
+     * @param index The index of this token.
+     * @return The token ready to execute actions.
+     */
     Token buildToken(String id, String index);
 
     final class Builder {

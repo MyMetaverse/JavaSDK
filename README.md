@@ -77,7 +77,7 @@ If you need any help visit our [Discord](https://discord.gg/TFGC4AxVTt).
 ## Dependencies
 
 This SDK requires Java 8+. \
-All dependencies are managed by Maven. \
+All dependencies are managed by Maven. 
 
 - OkHttp 
 - Project Lombok (For Development)

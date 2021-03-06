@@ -22,9 +22,10 @@ public class EnjinWalletDeserializer implements JsonDeserializer<List<EnjinWalle
 
             if(jsonObject.has("token_indexes"))
                 for (JsonElement token_indexes : jsonObject.getAsJsonArray("token_indexes"))
-                    itemIndices.add(new ItemIndex(token_indexes.getAsString()));
+                    itemIndices.add(new ItemIndex(null, token_indexes.getAsString()));
 
             EnjinWalletItemImpl enjinWalletItem = new EnjinWalletItemImpl(
+                    null,
                     jsonObject.get("token_id").getAsString(),
                     itemIndices,
                     jsonObject.get("NFT").getAsBoolean(),

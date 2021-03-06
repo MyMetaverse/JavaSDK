@@ -11,12 +11,12 @@ import io.mymetavese.metaapi.requests.entities.MessageImpl;
 public class UpdateTokenActionImpl extends RestActionImpl<Message> implements UpdateTokenAction {
 
     public UpdateTokenActionImpl(MetaAPI api) {
-        super(api, Route.MetaData.UpdateTokenAchievements, MessageImpl.class);
+        super(api, Route.MetaData.EDIT_TOKEN, MessageImpl.class);
     }
 
     @Override
     protected JsonObject buildBody(JsonObject body) {
-        return requestBody;
+        return body;
     }
 
     @Override

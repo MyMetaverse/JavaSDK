@@ -6,14 +6,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RequestError extends Throwable {
 
-    private final int code;
+    @Getter
+    private final String code;
 
     @Getter
     private final String error;
 
-    public int code() {
-        return code;
-    }
 
     @Override
     public String getMessage() {

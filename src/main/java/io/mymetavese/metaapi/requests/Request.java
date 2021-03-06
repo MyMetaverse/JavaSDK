@@ -30,11 +30,14 @@ public class Request<T> {
     }
 
     public void onSuccess(T t) {
+        if(success == null)
+            throw new NullPointerException("Success callback cannot be null.");
         success.accept(t);
     }
 
     public void onFailure(RequestError response) {
-       failure.accept(response);
+        if(failure != null)
+            failure.accept(response);
     }
 
     public void handleResponse(Response response) {

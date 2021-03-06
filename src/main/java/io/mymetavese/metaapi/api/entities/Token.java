@@ -25,6 +25,12 @@ public interface Token {
     String getIndex();
 
     /**
+     * An amount associated to this token.
+     * @return The amount associated to this token.
+     */
+    int getAmount();
+
+    /**
      * Return a builder to fill with edited achievements for this token.
      * @return The builder to edit this token.
      */

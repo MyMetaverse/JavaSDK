@@ -3,7 +3,6 @@ package io.mymetavese.metaapi.requests.entities;
 import com.google.gson.annotations.SerializedName;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.entities.EnjinWalletItem;
-import io.mymetavese.metaapi.requests.ApiImplementation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,11 +10,10 @@ import lombok.Setter;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class EnjinWalletItemImpl implements EnjinWalletItem, ApiImplementation  {
+public class EnjinWalletItemImpl implements EnjinWalletItem  {
 
     @Getter
-    @Setter
-    private MetaAPI metaAPI;
+    private final MetaAPI metaAPI;
 
     @Getter
     private final String tokenId;
