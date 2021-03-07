@@ -58,8 +58,7 @@ jobs:
         - run:
             name: Init GPG
             command: |
-              echo -e $GPG_KEY >> PRIVATE.asc
-              gpg --batch --import PRIVATE.asc
+              gpg --batch --import <(echo -e $GPG_KEY)
 
         - run:
             name: Create settings.xml
