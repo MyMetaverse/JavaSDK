@@ -18,6 +18,9 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
+      - store_artifacts:
+          path: ./target
+
       - persist_to_workspace:
           root: ./
           paths:
@@ -72,16 +75,33 @@ jobs:
 
 
 workflows:
-  build-test-deploy:
+  build-test:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore: master
+            tags:
+              ignore: /.*/
+
       - test:
           requires:
             - build
-      - deploy:
-          context: MavenDeployment
+
+  build-test-deploy:
+    jobs:
+      - build:
           filters:
             branches:
               only: master
+            tags:
+              only: /^v.*/
+
+      - test:
+          requires:
+            - build
+
+      - deploy:
+          context: MavenDeployment
           requires:
             - test

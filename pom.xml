@@ -6,7 +6,7 @@
 
     <groupId>io.mymetaverse</groupId>
     <artifactId>metapi</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -84,7 +84,7 @@
         <repository>
             <id>github</id>
             <name>GitHub MyMetaverse Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/MyMetaverse/MetaAPI</url>
+            <url>https://maven.pkg.github.com/MyMetaverse/JavaSDK</url>
         </repository>
     </distributionManagement>
 
