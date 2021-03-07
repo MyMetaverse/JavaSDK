@@ -58,7 +58,8 @@ jobs:
         - run:
             name: Create settings for Maven
             command: |
-              gpg -v --batch --import <(echo -e $GPG_KEY)
+              echo -e $GPG_KEY >> PRIVATE.asc
+              gpg --batch --import PRIVATE.asc
               cd ~/project && gpg --decrypt settings.xml.gpg > settings.xml
 
         - run:
