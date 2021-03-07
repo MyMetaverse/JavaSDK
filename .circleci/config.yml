@@ -58,7 +58,7 @@ jobs:
         - run:
             name: Create settings.xml
             command: |
-              gpg --batch --import <(echo $PGP_KEY)
+              gpg --batch --import <(echo $GPG_KEY)
               cd ~/project && gpg --batch --decrypt settings.xml.gpg >> settings.xml
 
         - run:
