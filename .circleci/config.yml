@@ -41,7 +41,7 @@ jobs:
           name: Test
           command: mvn test
 
-  deploy_api:
+  deploy:
       docker:
         - image: cimg/openjdk:8.0.272
 
@@ -72,13 +72,16 @@ jobs:
 
 
 workflows:
-  full_deploy:
+  build-test-deploy:
     jobs:
       - build
       - test:
           requires:
             - build
-      - deploy_api:
+      - deploy:
           context: MavenDeployment
+          filters:
+            branches:
+              only: master
           requires:
             - test
