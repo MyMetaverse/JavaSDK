@@ -56,16 +56,10 @@ jobs:
             at: ./target
 
         - run:
-            name: Init GPG
-            command: |
-              echo -e $GPG_KEY >> PRIVATE.asc
-              gpg --batch --import PRIVATE.asc
-              exit 0
-
-        - run:
             name: Create settings.xml
-            command: cd ~/project && gpg --decrypt settings.xml.gpg >> settings.xml
-
+            command: |
+              gpg --batch --import <(echo $PGP_KEY)
+              cd ~/project && gpg --batch --decrypt settings.xml.gpg >> settings.xml
 
         - run:
             name: Deploy
