@@ -41,7 +41,7 @@ jobs:
           name: Test
           command: mvn test
 
-    deploy_api:
+  deploy_api:
       docker:
         - image: cimg/openjdk:8.0.272
       steps:
