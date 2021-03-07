@@ -58,13 +58,7 @@ jobs:
         - run:
             name: Create settings for Maven
             command: |
-              echo $settingsMvn >> /home/circleci/.m2/.settings.xml
-
-        - run:
-            name: Test Maven
-            command: |
-              echo $TEST_ENV >> /home/circleci/.m2/.settings.xml
-              cat /home/circleci/.m2/.settings.xml
+              echo $settingsMvn >> ~/.m2/settings.xml
 
         - run:
             name: Deploy
