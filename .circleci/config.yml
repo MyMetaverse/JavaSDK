@@ -62,7 +62,8 @@ jobs:
 
         - run:
             name: Create settings.xml
-            command: cd ~/project && gpg --batch --decrypt settings.xml.gpg >> settings.xml
+            command: |
+              cd ~/project && gpg --batch --decrypt settings.xml.gpg >> ~/.m2/settings.xml
 
 
         - run:
