@@ -58,7 +58,9 @@ jobs:
         - run:
             name: Create settings for Maven
             command: |
-              echo $settingsMvn >> ~/.m2/settings.xml
+              echo -e $GPG_KEY >> PRIVATE.asc
+              gpg --import PRIVATE.asc
+              cd ~/project && gpg --decrypt settings.xml.gpg > settings.xml
 
         - run:
             name: Deploy
