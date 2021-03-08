@@ -33,7 +33,7 @@ jobs:
       - checkout
 
       - attach_workspace:
-          at: ./target
+          at: ./
 
       - run:
           name: Test
@@ -47,7 +47,7 @@ jobs:
         - checkout
 
         - attach_workspace:
-            at: ./target
+            at: ./
 
         - run:
             name: Init GPG
@@ -57,6 +57,7 @@ jobs:
         - run:
             name: Create settings.xml
             command: |
+              cd ~ && mkdir -p .m2
               cd ~/project && gpg --batch --decrypt settings.xml.gpg >> ~/.m2/settings.xml
 
 
@@ -66,31 +67,31 @@ jobs:
 
 
 workflows:
-  build-test:
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore: master
-            tags:
-              ignore: /.*/
-
-      - test:
-          requires:
-            - build
+#  build-test:
+#    jobs:
+#      - build:
+#          filters:
+#            branches:
+#              ignore: master
+#            tags:
+#              ignore: /.*/
+#
+#      - test:
+#          requires:
+#            - build
 
   build-test-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-            tags:
-              only: /^v.*/
-
-      - test:
-          requires:
-            - build
+      - build
+#  :
+#filters:
+#  branches:
+#    only: master
+#  tags:
+#    only: /^v.*/
+#      - test:
+#          requires:
+#            - build
 
       - deploy:
           context: MavenDeployment
