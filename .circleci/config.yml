@@ -19,8 +19,7 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       - store_artifacts:
-          path: ./target/*.jar
-          destination: target
+          path: ./target
 
       - persist_to_workspace:
           root: ./
@@ -39,9 +38,6 @@ jobs:
       - run:
           name: Test
           command: mvn test
-
-      - store_test_results:
-          path: test-results
 
   deploy:
       docker:
