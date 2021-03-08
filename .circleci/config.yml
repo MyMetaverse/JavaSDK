@@ -67,9 +67,27 @@ jobs:
 
 
 workflows:
+  build-test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: master
+            tags:
+              ignore: /.*/
+
+      - test:
+          requires:
+            - build
+
   build-test-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
 
       - test:
           requires:
