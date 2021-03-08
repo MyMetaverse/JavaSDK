@@ -31,10 +31,7 @@ jobs:
     docker:
       - image: cimg/openjdk:8.0.272
     steps:
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-
+      - checkout
 
       - attach_workspace:
           at: ./target
@@ -51,10 +48,7 @@ jobs:
         - image: cimg/openjdk:8.0.272
 
       steps:
-        - restore_cache:
-            keys:
-                - v1-dependencies-{{ checksum "pom.xml" }}
-                - v1-dependencies-
+        - checkout
 
         - attach_workspace:
             at: ./target
