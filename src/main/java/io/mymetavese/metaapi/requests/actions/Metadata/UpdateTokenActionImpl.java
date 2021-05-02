@@ -12,11 +12,12 @@ public class UpdateTokenActionImpl extends RestActionImpl<Message> implements Up
 
     public UpdateTokenActionImpl(MetaAPI api) {
         super(api, Route.MetaData.EDIT_TOKEN, MessageImpl.class);
+        createRequestBody();
     }
 
     @Override
-    protected JsonObject buildBody(JsonObject body) {
-        return body;
+    protected JsonObject buildBody() {
+        return requestBody;
     }
 
     @Override

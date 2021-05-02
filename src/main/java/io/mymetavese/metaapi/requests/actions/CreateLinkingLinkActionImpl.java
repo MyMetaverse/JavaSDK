@@ -1,31 +1,27 @@
 package io.mymetavese.metaapi.requests.actions;
 
 import io.mymetavese.metaapi.api.MetaAPI;
-import io.mymetavese.metaapi.api.actions.LinkPlayerAction;
+import io.mymetavese.metaapi.api.actions.CreateLinkingLinkAction;
 import io.mymetavese.metaapi.api.entities.GameEntity;
-import io.mymetavese.metaapi.api.entities.Message;
+import io.mymetavese.metaapi.api.entities.LinkingLink;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
 import io.mymetavese.metaapi.requests.Route;
+import io.mymetavese.metaapi.requests.entities.LinkingLinkImpl;
 
-public class LinkPlayerActionImpl extends RestActionImpl<Message> implements LinkPlayerAction {
+public class CreateLinkingLinkActionImpl extends RestActionImpl<LinkingLink> implements CreateLinkingLinkAction {
 
     private final GameEntity gameEntity;
 
-    private final String linkingCode;
-
-    public LinkPlayerActionImpl(MetaAPI api, GameEntity gameEntity, String linkingCode) {
-        super(api, Route.LiveWallet.LINK_PLAYER);
-
+    public CreateLinkingLinkActionImpl(MetaAPI api, GameEntity gameEntity) {
+        super(api, Route.LiveWallet.CREATE_LINKING_LINK, LinkingLinkImpl.class);
         this.gameEntity = gameEntity;
-        this.linkingCode = linkingCode;
     }
 
     @Override
     protected JsonObject buildBody() {
         JsonObject body = JsonObject.JsonObjectBuilder.newBuilder().create();
-        body.append("PlayerID", gameEntity.getPlayerID());
-        body.append("LinkingCode", linkingCode);
+        body.append("playerId", gameEntity.getPlayerID());
         return body;
     }
 

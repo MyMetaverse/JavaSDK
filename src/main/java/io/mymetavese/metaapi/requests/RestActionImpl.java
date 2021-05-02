@@ -22,7 +22,7 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     protected final Route route;
 
-    protected final JsonObject requestBody;
+    protected JsonObject requestBody;
 
     private final Class<? extends T> classToTransform;
 
@@ -35,7 +35,6 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
     public RestActionImpl(MetaAPI api, Route route, Class<? extends T> classToTransform) {
         this.route = route;
         this.metaAPI = api;
-        this.requestBody = buildBody(JsonObject.JsonObjectBuilder.newBuilder().create());
         this.classToTransform = classToTransform;
     }
 
@@ -43,7 +42,14 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
         return route.compileRoute();
     }
 
-    protected JsonObject buildBody(JsonObject body) {
+    /**
+     * Create your 'global' request body.
+     */
+    protected void createRequestBody() {
+        requestBody = JsonObject.JsonObjectBuilder.newBuilder().create();
+    }
+
+    protected JsonObject buildBody() {
         return null;
     }
 
@@ -77,12 +83,12 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     @Override
     public CompletableFuture<T> submit() {
-        return new FutureRestAction<>(metaAPI, this, compileRoute(), route, requestBody, extraHeaders);
+        return new FutureRestAction<>(metaAPI, this, compileRoute(), route, buildBody(), extraHeaders);
     }
 
     @Override
     public void queue(Consumer<? super T> success, Consumer<? super RequestError> failure) {
-        Request<T> request = new Request<>(this, compileRoute(), route, requestBody, extraHeaders, success, failure);
+        Request<T> request = new Request<>(this, compileRoute(), route, buildBody(), extraHeaders, success, failure);
         ((MetaAPIImpl) metaAPI).getRequestGenerator().asyncRequest(request);
     }
 

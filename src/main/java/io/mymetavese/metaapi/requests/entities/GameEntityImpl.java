@@ -43,8 +43,8 @@ public class GameEntityImpl implements GameEntity {
     }
 
     @Override
-    public LinkPlayerAction linkPlayer(String linkingCode) {
-        return new LinkPlayerActionImpl(metaAPI, this, linkingCode);
+    public CreateLinkingLinkAction createLinkingLink() {
+        return new CreateLinkingLinkActionImpl(metaAPI, this);
     }
 
     @Override

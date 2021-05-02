@@ -10,19 +10,18 @@ public class RequestError extends Throwable {
     private final String code;
 
     @Getter
-    private final String error;
+    private final String message;
 
-
-    @Override
-    public String getMessage() {
-        return error;
-    }
+    @Getter
+    private final String help;
 
     @Override
     public String toString() {
         return "RequestError{" +
-                "code=" + code +
-                ", error='" + error + '\'' +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", help='" + help + '\'' +
                 '}';
     }
+
 }

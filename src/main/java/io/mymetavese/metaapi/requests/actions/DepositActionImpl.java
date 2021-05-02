@@ -27,7 +27,8 @@ public class DepositActionImpl extends RestActionImpl<Message> implements Deposi
     }
 
     @Override
-    protected JsonObject buildBody(JsonObject body) {
+    protected JsonObject buildBody() {
+        JsonObject body = JsonObject.JsonObjectBuilder.newBuilder().create();
         body.append("PlayerID", gameEntity.getPlayerID());
 
         // We convert the tokens to a format that can be used by the remote API.

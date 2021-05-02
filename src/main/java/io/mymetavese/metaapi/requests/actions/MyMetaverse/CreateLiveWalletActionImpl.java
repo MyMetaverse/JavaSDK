@@ -19,7 +19,8 @@ public class CreateLiveWalletActionImpl extends RestActionImpl<LinkingCode> impl
     }
 
     @Override
-    protected JsonObject buildBody(JsonObject body) {
+    protected JsonObject buildBody() {
+        JsonObject body = JsonObject.JsonObjectBuilder.newBuilder().create();
         body.append("MyMetaverseID", metaUser);
         return body;
     }

@@ -23,7 +23,8 @@ public class UpdateTokenAchievementsActionImpl extends RestActionImpl<Message> i
     }
 
     @Override
-    protected JsonObject buildBody(JsonObject body) {
+    protected JsonObject buildBody() {
+        JsonObject body = JsonObject.JsonObjectBuilder.newBuilder().create();
         body.append("achievements", tokenAchievementList);
         return body;
     }

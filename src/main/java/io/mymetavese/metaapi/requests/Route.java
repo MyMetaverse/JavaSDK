@@ -10,7 +10,7 @@ import static io.mymetavese.metaapi.requests.Method.*;
 
 public class Route {
 
-    private static final String API_ROUTE = "https://livewallet.mymetaverse.io";
+    private static final String API_ROUTE = "https://cloud.mymetaverse.io";
 
     public static class LiveWallet {
         public static final Route LINK_PLAYER = new Route(POST, "/LiveWallet/LinkPlayer");
@@ -19,6 +19,7 @@ public class Route {
         public static final Route SEND_TRADE_REQUEST = new Route(POST, "/LiveWallet/Trade/SendTradeRequest");
         public static final Route GET_ETH_ADDRESS = new Route(GET, "/LiveWallet/GetEthAddress/{PlayerID}");
         public static final Route GET_ITEMS = new Route(GET, "/LiveWallet/GetItems/{PlayerID}");
+        public static final Route CREATE_LINKING_LINK = new Route(POST, "/playerBehavior/createLinkingLink");
     }
 
     public static class MetaData {
@@ -74,6 +75,9 @@ public class Route {
             throw new IllegalArgumentException("You are missing some arguments in this route.");
         }
         String fullRoute = API_ROUTE + route;
+
+        if(arguments == 0)
+            return fullRoute;
 
         return compileNextArgument(fullRoute, args);
     }

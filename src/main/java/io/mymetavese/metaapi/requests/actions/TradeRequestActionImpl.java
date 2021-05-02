@@ -34,9 +34,11 @@ public class TradeRequestActionImpl extends RestActionImpl<TradeRequest> impleme
     }
 
     @Override
-    protected JsonObject buildBody(JsonObject body) {
-        body.append("InitiatorPlayerID", gameEntity.getPlayerID());
-        body.append("ReceiverPlayerID", targetGameEntity.getPlayerID());
+    protected JsonObject buildBody() {
+        JsonObject body  = JsonObject.JsonObjectBuilder.newBuilder().create();
+
+        body.append("InitiatorUserID", gameEntity.getPlayerID());
+        body.append("ReceiverUserID", targetGameEntity.getPlayerID());
         body.append("ItemsToOffer", itemsToOffer);
         body.append("ItemsToAsk", itemsToAsk);
 
