@@ -6,6 +6,7 @@ import io.mymetavese.metaapi.MetaAPIImpl;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.RequestError;
 import io.mymetavese.metaapi.api.RestAction;
+import io.mymetavese.metaapi.requests.routes.Routes;
 import lombok.Getter;
 import okhttp3.Response;
 
@@ -28,12 +29,12 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     private Map<String, String> extraHeaders;
 
-    public RestActionImpl(MetaAPI api, Route route) {
+    public RestActionImpl(MetaAPI api, Routes route) {
         this(api, route, null);
     }
 
-    public RestActionImpl(MetaAPI api, Route route, Class<? extends T> classToTransform) {
-        this.route = route;
+    public RestActionImpl(MetaAPI api, Routes route, Class<? extends T> classToTransform) {
+        this.route = ((MetaAPIImpl) api).getRouteAdapter().getRoute(route);
         this.metaAPI = api;
         this.classToTransform = classToTransform;
     }
@@ -54,7 +55,7 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
     }
 
     public void addHeader(String header, String data) {
-        if(extraHeaders == null)
+        if (extraHeaders == null)
             extraHeaders = new HashMap<>();
 
         extraHeaders.put(header, data);
@@ -72,7 +73,7 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
 
     @Override
     public T transform(Response response) {
-        if(classToTransform == null)
+        if (classToTransform == null)
             throw new NullPointerException("Class to transform cannot be null.");
 
         if (response == null || response.body() == null)

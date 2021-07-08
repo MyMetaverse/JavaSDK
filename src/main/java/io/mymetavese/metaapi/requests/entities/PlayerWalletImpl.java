@@ -1,9 +1,7 @@
 package io.mymetavese.metaapi.requests.entities;
 
-import com.google.gson.annotations.JsonAdapter;
-import io.mymetavese.metaapi.api.entities.LiveWalletItem;
 import io.mymetavese.metaapi.api.entities.PlayerWallet;
-import io.mymetavese.metaapi.requests.CustomDeserializers.LiveWalletDeserializer;
+import io.mymetavese.metaapi.api.entities.WalletItem;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -11,26 +9,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlayerWalletImpl implements PlayerWallet {
 
-    @JsonAdapter(LiveWalletDeserializer.class)
-    private final List<LiveWalletItemImpl> LiveWallet;
+    private final List<WalletItemImpl> liveWallet;
 
-    private final EnjinWalletImpl EnjinWallet;
+    private final List<WalletItemImpl> enjinWallet;
 
-    @Override
-    public io.mymetavese.metaapi.api.entities.EnjinWallet getEnjinWallet() {
-        return EnjinWallet;
-    }
-
-    @Override
-    public List<? extends LiveWalletItem> getLiveWallet() {
-        return LiveWallet;
-    }
 
     @Override
     public String toString() {
         return "PlayerWalletImpl{" +
-                "LiveWallet=" + LiveWallet +
-                ", EnjinWallet=" + EnjinWallet +
+                "LiveWallet=" + liveWallet +
+                ", EnjinWallet=" + enjinWallet +
                 '}';
     }
+
+    @Override
+    public List<? extends WalletItem> getEnjinWallet() {
+        return enjinWallet;
+    }
+
+    @Override
+    public List<? extends WalletItem> getMyMetaverseWallet() {
+        return liveWallet;
+    }
+
 }

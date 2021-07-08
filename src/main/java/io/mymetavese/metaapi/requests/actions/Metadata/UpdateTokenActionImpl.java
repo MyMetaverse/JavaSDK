@@ -11,7 +11,7 @@ import io.mymetavese.metaapi.requests.entities.MessageImpl;
 public class UpdateTokenActionImpl extends RestActionImpl<Message> implements UpdateTokenAction {
 
     public UpdateTokenActionImpl(MetaAPI api) {
-        super(api, Route.MetaData.EDIT_TOKEN, MessageImpl.class);
+        super(api, null, MessageImpl.class);
         createRequestBody();
     }
 

@@ -6,7 +6,6 @@ import io.mymetavese.metaapi.api.entities.MetaUser;
 import io.mymetavese.metaapi.api.entities.MyMetaverse.LinkingCode;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
 import io.mymetavese.metaapi.requests.entities.MyMetaverse.LinkingCodeImpl;
 
 public class CreateLiveWalletActionImpl extends RestActionImpl<LinkingCode> implements CreateLiveWalletAction {
@@ -14,7 +13,7 @@ public class CreateLiveWalletActionImpl extends RestActionImpl<LinkingCode> impl
     private final MetaUser metaUser;
 
     public CreateLiveWalletActionImpl(MetaAPI api, MetaUser metaUser) {
-        super(api, Route.MyMetaverse.CREATE_LIVEWALLET, LinkingCodeImpl.class);
+        super(api, null, LinkingCodeImpl.class);
         this.metaUser = metaUser;
     }
 

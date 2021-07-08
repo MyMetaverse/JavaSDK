@@ -1,9 +1,7 @@
 package io.mymetavese.metaapi.requests.entities;
 
-import com.google.gson.annotations.JsonAdapter;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.entities.EnjinWallet;
-import io.mymetavese.metaapi.requests.CustomDeserializers.EnjinWalletDeserializer;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -19,8 +17,7 @@ public class EnjinWalletImpl implements EnjinWallet {
     private final String address;
 
     @Getter
-    @JsonAdapter(EnjinWalletDeserializer.class)
-    private final List<EnjinWalletItemImpl> items;
+    private final List<LiveWalletItemImpl> items;
 
     @Override
     public String toString() {

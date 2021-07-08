@@ -39,7 +39,7 @@ public class LiveWalletDeserializer implements JsonDeserializer<List<LiveWalletI
                     itemIndices,
                     jsonObject.get("NFT").getAsBoolean(),
                     jsonObject.get("amount").getAsInt(),
-                    locked
+                    ""
             );
 
             liveWalletItems.add(liveWalletItem);

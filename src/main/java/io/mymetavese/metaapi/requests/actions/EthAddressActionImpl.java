@@ -1,12 +1,11 @@
 package io.mymetavese.metaapi.requests.actions;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.EthAddressAction;
 import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
+import io.mymetavese.metaapi.requests.routes.Routes;
 import okhttp3.Response;
 
 import java.util.Objects;
@@ -18,7 +17,7 @@ public class EthAddressActionImpl extends RestActionImpl<String> implements EthA
     private String ethAddress = null;
 
     public EthAddressActionImpl(MetaAPI api, GameEntity gameEntity) {
-        super(api, Route.LiveWallet.GET_ETH_ADDRESS);
+        super(api, Routes.GET_ETH_ADDRESS);
         this.gameEntity = gameEntity;
     }
 
@@ -44,7 +43,6 @@ public class EthAddressActionImpl extends RestActionImpl<String> implements EthA
     }
 
     private static class EthAddressWrapper {
-        @SerializedName("Address")
         private String address;
     }
 }

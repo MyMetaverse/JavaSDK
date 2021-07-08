@@ -6,7 +6,6 @@ import io.mymetavese.metaapi.api.entities.Message;
 import io.mymetavese.metaapi.api.entities.Metadata.TokenAchievement;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
 import io.mymetavese.metaapi.requests.entities.MessageImpl;
 import io.mymetavese.metaapi.requests.entities.Metadata.TokenAchievementImpl;
 
@@ -18,7 +17,7 @@ public class UpdateTokenAchievementsActionImpl extends RestActionImpl<Message> i
     private final List<TokenAchievementImpl> tokenAchievementList;
 
     public UpdateTokenAchievementsActionImpl(MetaAPI api) {
-        super(api, Route.MetaData.UPDATE_TOKEN_ACHIEVEMENTS, MessageImpl.class);
+        super(api, null, MessageImpl.class);
         this.tokenAchievementList = new ArrayList<>();
     }
 

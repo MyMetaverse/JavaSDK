@@ -16,7 +16,7 @@ public interface EnjinWallet {
      * Get all the items included by this EnjinWallet
      * @return A list including all the items owned by this wallet.
      */
-    List<? extends EnjinWalletItem> getItems();
+    List<? extends LiveWalletItem> getItems();
 
     /**
      * This will return if the player already linked his account with Enjin.

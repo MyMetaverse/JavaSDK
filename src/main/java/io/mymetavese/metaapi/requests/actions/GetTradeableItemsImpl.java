@@ -6,7 +6,6 @@ import io.mymetavese.metaapi.api.actions.GetTradeableItems;
 import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.TradeableItemsList;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
 import io.mymetavese.metaapi.requests.entities.TradeableItemsListImpl;
 import okhttp3.Response;
 
@@ -19,7 +18,7 @@ public class GetTradeableItemsImpl extends RestActionImpl<TradeableItemsList> im
     private final GameEntity receiverGameEntity;
 
     public GetTradeableItemsImpl(MetaAPI api, GameEntity initiatorGameEntity, GameEntity receiverGameEntity) {
-        super(api, Route.LiveWallet.GET_TRADEABLE_ITEMS, TradeableItemsListImpl.class);
+        super(api, null, TradeableItemsListImpl.class);
         this.initiatorGameEntity = initiatorGameEntity;
         this.receiverGameEntity = receiverGameEntity;
     }

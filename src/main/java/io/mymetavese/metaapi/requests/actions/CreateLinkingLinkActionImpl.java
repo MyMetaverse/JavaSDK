@@ -6,7 +6,6 @@ import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.LinkingLink;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
 import io.mymetavese.metaapi.requests.entities.LinkingLinkImpl;
 
 public class CreateLinkingLinkActionImpl extends RestActionImpl<LinkingLink> implements CreateLinkingLinkAction {
@@ -14,7 +13,7 @@ public class CreateLinkingLinkActionImpl extends RestActionImpl<LinkingLink> imp
     private final GameEntity gameEntity;
 
     public CreateLinkingLinkActionImpl(MetaAPI api, GameEntity gameEntity) {
-        super(api, Route.LiveWallet.CREATE_LINKING_LINK, LinkingLinkImpl.class);
+        super(api, null, LinkingLinkImpl.class);
         this.gameEntity = gameEntity;
     }
 

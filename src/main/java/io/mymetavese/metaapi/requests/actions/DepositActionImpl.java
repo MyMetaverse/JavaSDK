@@ -7,7 +7,6 @@ import io.mymetavese.metaapi.api.entities.Message;
 import io.mymetavese.metaapi.api.entities.Token;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +20,7 @@ public class DepositActionImpl extends RestActionImpl<Message> implements Deposi
     private final List<Token> tokens;
 
     public DepositActionImpl(MetaAPI api, GameEntity gameEntity, List<Token> tokens) {
-        super(api, Route.LiveWallet.DEPOSIT);
+        super(api, null);
         this.gameEntity = gameEntity;
         this.tokens = tokens;
     }

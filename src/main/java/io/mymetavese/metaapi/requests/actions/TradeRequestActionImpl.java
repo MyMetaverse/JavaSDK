@@ -6,7 +6,6 @@ import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.TradeRequest;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
 import io.mymetavese.metaapi.requests.entities.LiveWalletItemImpl;
 import io.mymetavese.metaapi.requests.entities.TradeRequestImpl;
 import okhttp3.Response;
@@ -21,7 +20,7 @@ public class TradeRequestActionImpl extends RestActionImpl<TradeRequest> impleme
     private final List<LiveWalletItemImpl> itemsToAsk;
 
     public TradeRequestActionImpl(MetaAPIImpl api, GameEntity gameEntity, GameEntity targetGameEntity, List<LiveWalletItemImpl> itemsToOffer, List<LiveWalletItemImpl> itemsToAsk) {
-        super(api, Route.LiveWallet.SEND_TRADE_REQUEST);
+        super(api, null);
         this.gameEntity = gameEntity;
         this.targetGameEntity = targetGameEntity;
         this.itemsToOffer = itemsToOffer;

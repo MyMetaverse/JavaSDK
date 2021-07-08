@@ -6,7 +6,6 @@ import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.Message;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.Route;
 
 public class LinkPlayerActionImpl extends RestActionImpl<Message> implements LinkPlayerAction {
 
@@ -15,7 +14,7 @@ public class LinkPlayerActionImpl extends RestActionImpl<Message> implements Lin
     private final String linkingCode;
 
     public LinkPlayerActionImpl(MetaAPI api, GameEntity gameEntity, String linkingCode) {
-        super(api, Route.LiveWallet.LINK_PLAYER);
+        super(api, null);
 
         this.gameEntity = gameEntity;
         this.linkingCode = linkingCode;

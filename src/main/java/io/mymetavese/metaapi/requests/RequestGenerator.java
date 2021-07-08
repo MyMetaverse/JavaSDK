@@ -31,7 +31,7 @@ public class RequestGenerator {
         String route = request.getCompiledRoute();
 
         okhttp3.Request.Builder builder = new okhttp3.Request.Builder();
-        builder.url(route);
+        builder.url(api.getRouteAdapter().getBaseUrl() + route);
 
         String method = request.getMethod().toString();
         JsonObject bodyObject = request.getRequestBody();
@@ -55,7 +55,7 @@ public class RequestGenerator {
 
         try(Response response = httpClient.newCall(builder.build()).execute()) {
             if (response.code() >= 500) {
-                throw new IOException("Internal server error.");
+                throw new IOException("Internal server error: " + response.body().string());
             }
 
             request.handleResponse(response);
