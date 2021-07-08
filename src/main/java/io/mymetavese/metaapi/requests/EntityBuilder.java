@@ -35,7 +35,7 @@ public class EntityBuilder {
                     indexList,
                     lw.get("NFT").getAsBoolean(),
                     lw.get("amount").getAsInt(),
-                    lw.get("locked").getAsJsonPrimitive().getAsString()
+                    null
             );
 
             liveWallet.add(liveWalletItem);

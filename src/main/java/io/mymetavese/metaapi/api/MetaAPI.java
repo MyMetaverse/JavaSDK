@@ -3,6 +3,7 @@ package io.mymetavese.metaapi.api;
 import io.mymetavese.metaapi.MetaAPIImpl;
 import io.mymetavese.metaapi.api.entities.GameEntity;
 import io.mymetavese.metaapi.api.entities.Token;
+import io.mymetavese.metaapi.requests.token.TokenHandler;
 
 public interface MetaAPI {
 
@@ -22,7 +23,7 @@ public interface MetaAPI {
     Token buildToken(String id, String index);
 
     final class Builder {
-        private String token;
+        private TokenHandler tokenHandler;
 
         private Builder() {
         }
@@ -31,14 +32,14 @@ public interface MetaAPI {
             return new Builder();
         }
 
-        public MetaAPIImpl.Builder withToken(String token) {
-            this.token = token;
+        public MetaAPIImpl.Builder withTokenHandler(TokenHandler tokenHandler) {
             return this;
         }
 
         public MetaAPIImpl build() {
-            return new MetaAPIImpl(token);
+            return new MetaAPIImpl(tokenHandler);
         }
+
     }
 
 }

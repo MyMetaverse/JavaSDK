@@ -6,6 +6,7 @@ import io.mymetavese.metaapi.api.entities.Token;
 import io.mymetavese.metaapi.requests.RequestGenerator;
 import io.mymetavese.metaapi.requests.entities.GameEntityImpl;
 import io.mymetavese.metaapi.requests.entities.TokenImpl;
+import io.mymetavese.metaapi.requests.token.TokenHandler;
 import lombok.Getter;
 import okhttp3.OkHttpClient;
 
@@ -16,7 +17,7 @@ import java.util.concurrent.ScheduledExecutorService;
 public class MetaAPIImpl implements MetaAPI {
 
     @Getter
-    private final String token;
+    private final TokenHandler tokenHandler;
 
     @Getter
     private final RequestGenerator requestGenerator;
@@ -30,8 +31,8 @@ public class MetaAPIImpl implements MetaAPI {
     @Getter
     private final OkHttpClient client;
 
-    public MetaAPIImpl(String token) {
-        this.token = token;
+    public MetaAPIImpl(TokenHandler tokenHandler) {
+        this.tokenHandler = tokenHandler;
 
         client = new OkHttpClient();
         this.requestGenerator = new RequestGenerator(this, client);

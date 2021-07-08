@@ -1,7 +1,10 @@
 package io.mymetavese.metaapi.requests;
 
 import io.mymetavese.metaapi.MetaAPIImpl;
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import okhttp3.internal.http.HttpMethod;
 
 import java.io.IOException;
@@ -10,7 +13,7 @@ public class RequestGenerator {
 
     private static final RequestBody EMPTY_BODY = RequestBody.create(new byte[0]);
     public static final String USER_AGENT = "";
-    private static final MediaType MEDIA_TYPE_JSON  = MediaType.parse("application/json; charset=utf-8");
+    private static final MediaType MEDIA_TYPE_JSON  = MediaType.get("application/json; charset=utf-8");
 
     private final OkHttpClient httpClient;
     private final MetaAPIImpl api;
@@ -38,11 +41,11 @@ public class RequestGenerator {
         if (bodyObject == null && HttpMethod.requiresRequestBody(method))
             body = EMPTY_BODY;
         else if(bodyObject != null)
-            body = RequestBody.create(MEDIA_TYPE_JSON, bodyObject.toJson());
+            body = RequestBody.create(bodyObject.toJson(), MEDIA_TYPE_JSON);
 
         builder.method(method, body)
-                .header("user-agent", USER_AGENT)
-                .header("Authorization", "Bearer " + api.getToken());
+                .header("User-Agent", USER_AGENT)
+                .header("Authorization", "Bearer " + api.getTokenHandler().getToken());
 
 
         if (request.getHeaders() != null && !request.getHeaders().isEmpty())

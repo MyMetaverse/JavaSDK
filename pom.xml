@@ -6,7 +6,7 @@
 
     <groupId>io.mymetaverse</groupId>
     <artifactId>metaapi</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.7</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -59,7 +59,14 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.10.0-RC1</version>
+            <version>4.9.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio</artifactId>
+            <version>3.0.0-alpha.4</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
