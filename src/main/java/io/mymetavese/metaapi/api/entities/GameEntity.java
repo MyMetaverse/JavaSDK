@@ -46,6 +46,13 @@ public interface GameEntity extends ApiEntity {
     CreateLinkingLinkAction createLinkingLink();
 
     /**
+     * Get the already created linking link for the player.
+     *
+     * @return An action that represents the linking link.
+     */
+    GetLinkingLink getLinkingLink();
+
+    /**
      * Use this to deposit items from LiveWallet to EnjinWallet
      *
      * @param items The items to be deposited into EnjinWallet

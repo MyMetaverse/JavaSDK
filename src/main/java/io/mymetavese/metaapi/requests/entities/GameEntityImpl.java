@@ -48,6 +48,11 @@ public class GameEntityImpl implements GameEntity {
     }
 
     @Override
+    public GetLinkingLink getLinkingLink() {
+        return new GetLinkingLinkActionImpl(metaAPI, this);
+    }
+
+    @Override
     public DepositAction deposit(List<Token> items) {
         return new DepositActionImpl(metaAPI, this, items);
     }

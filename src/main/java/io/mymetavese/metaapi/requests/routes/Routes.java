@@ -5,6 +5,12 @@ public enum Routes {
 
     GET_WALLET,
 
-    GET_ETH_ADDRESS;
+    GET_ETH_ADDRESS,
+
+    CREATE_LINKING_LINK,
+
+    GET_LINKING_LINK
+
+    ;
 
 }

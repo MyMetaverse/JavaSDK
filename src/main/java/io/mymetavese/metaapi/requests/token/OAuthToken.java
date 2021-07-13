@@ -66,8 +66,9 @@ public class OAuthToken implements TokenHandler {
         builder.get();
 
         try (Response response = httpClient.newCall(builder.build()).execute()) {
-            if (response.code() >= 500)
-                throw new IOException("Internal server error.");
+            if (response.code() != 200) {
+                throw new IOException("Internal server error: " + Objects.requireNonNull(response.body()).string());
+            }
 
             TokenResponse tokenResponse = this.gson.fromJson(Objects.requireNonNull(response.body()).charStream(), TokenResponse.class);
 

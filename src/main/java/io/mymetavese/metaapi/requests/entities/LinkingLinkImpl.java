@@ -8,12 +8,17 @@ import lombok.RequiredArgsConstructor;
 public class LinkingLinkImpl implements LinkingLink {
 
     @Getter
-    private final String status;
-
-    @Getter
     private final String linkingLink;
 
     @Getter
     private final String linkId;
+
+    @Override
+    public String toString() {
+        return "LinkingLinkImpl{" +
+                "linkingLink='" + linkingLink + '\'' +
+                ", linkId='" + linkId + '\'' +
+                '}';
+    }
 
 }

@@ -8,8 +8,10 @@ public interface LinkingLink {
      */
     String getLinkingLink();
 
+    /**
+     * Get the link ID for this app-link.
+     * @return The Linking link as String.
+     */
     String getLinkId();
-
-    String getStatus();
 
 }
