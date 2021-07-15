@@ -11,8 +11,7 @@ public class V2 extends RouteAdapter {
 
 
     public V2() {
-        //super("https://devcloud.mymetaverse.io/adopters", new HashMap<>());
-        super("http://127.0.0.1:8080", new HashMap<>());
+        super("https://devcloud.mymetaverse.io/adopters", new HashMap<>());
 
         //this.routes.put("LINK_PLAYER", );
         this.routes.put("GET_WALLET", new Route(GET, "/users/{user}/wallet"));
