@@ -9,7 +9,8 @@ import java.util.Objects;
 
 public class OAuthToken implements TokenHandler {
 
-    private final static MediaType JSON_MEDIA_TYPE = MediaType.get("application/json; charset=utf-8");
+    private final static MediaType JSON_MEDIA_TYPE = MediaType.get("application/x-www-form-urlencoded; charset=utf-8");
+    private static final RequestBody EMPTY_BODY = RequestBody.create(new byte[0], JSON_MEDIA_TYPE);
     // Data to generate token
     private final OkHttpClient httpClient;
     private final Gson gson;
@@ -49,21 +50,23 @@ public class OAuthToken implements TokenHandler {
                 .addPathSegment("oauth2")
                 .addPathSegment("token");
 
+        final FormBody.Builder formBody = new FormBody.Builder();
+
         if (withCredentials) {
-            urlBuilder.addQueryParameter("grant_type", "client_credentials");
-            urlBuilder.addQueryParameter("client_id", this.clientId);
-            urlBuilder.addQueryParameter("client_secret", this.clientSecret);
+            formBody.add("grant_type", "client_credentials");
+            formBody.add("client_id", this.clientId);
+            formBody.add("client_secret", this.clientSecret);
         } else {
             if (this.refreshToken == null)
                 throw new NullPointerException("Refresh token is not available, try first with credentials.");
 
-            urlBuilder.addQueryParameter("grant_type", "refresh_token");
-            urlBuilder.addQueryParameter("refresh_token", this.refreshToken);
+            formBody.add("grant_type", "refresh_token");
+            formBody.add("refresh_token", this.refreshToken);
         }
 
         builder.url(urlBuilder.build());
 
-        builder.get();
+        builder.post(formBody.build());
 
         try (Response response = httpClient.newCall(builder.build()).execute()) {
             if (response.code() != 200) {
