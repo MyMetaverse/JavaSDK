@@ -1,9 +1,11 @@
 package io.mymetavese.metaapi.requests.entities;
 
 import io.mymetavese.metaapi.api.MetaAPI;
+import io.mymetavese.metaapi.api.actions.Metadata.FetchTokenAction;
 import io.mymetavese.metaapi.api.actions.Metadata.UpdateTokenAchievementsAction;
 import io.mymetavese.metaapi.api.actions.Metadata.UpdateTokenAction;
 import io.mymetavese.metaapi.api.entities.Token;
+import io.mymetavese.metaapi.requests.actions.Metadata.FetchTokenActionImpl;
 import io.mymetavese.metaapi.requests.actions.Metadata.UpdateTokenAchievementsActionImpl;
 import io.mymetavese.metaapi.requests.actions.Metadata.UpdateTokenActionImpl;
 import lombok.Getter;
@@ -34,6 +36,11 @@ public class TokenImpl implements Token {
     @Override
     public UpdateTokenAction createTokenEditor() {
         return new UpdateTokenActionImpl(metaAPI);
+    }
+
+    @Override
+    public FetchTokenAction createTokenFetcher() {
+        return new FetchTokenActionImpl(metaAPI, this);
     }
 
 }

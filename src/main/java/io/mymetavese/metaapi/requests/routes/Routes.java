@@ -9,8 +9,8 @@ public enum Routes {
 
     CREATE_LINKING_LINK,
 
-    GET_LINKING_LINK
+    GET_LINKING_LINK,
 
-    ;
+    GET_TOKEN_METADATA
 
 }
