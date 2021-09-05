@@ -1,5 +1,9 @@
 package io.mymetavese.metaapi.api.entities.Metadata;
 
+import io.mymetavese.metaapi.api.entities.v2.IndexProperty;
+
+import java.util.Set;
+
 public interface TokenMetadata {
 
     /**
@@ -18,6 +22,12 @@ public interface TokenMetadata {
      * Get token image
      * @return the URI of the token's image
      */
-    String getImageURI();
+    String getImageURL();
+
+    String getTokenIndex();
+
+    Set<IndexProperty> getProperties();
+
+    Set<IndexProperty> getHiddenProperties();
 
 }

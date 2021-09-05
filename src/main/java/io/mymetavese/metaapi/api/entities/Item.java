@@ -8,7 +8,7 @@ public interface Item {
 
     /**
      * The token is the ID used to identify this Item in the blockchain.
-     * @return A string representing the Token ID for this Item.
+     * @return A string representing the WalletIndex ID for this Item.
      */
     String getTokenId();
 

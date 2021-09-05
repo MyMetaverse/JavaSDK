@@ -1,8 +1,7 @@
 package io.mymetavese.metaapi.api;
 
 import io.mymetavese.metaapi.MetaAPIImpl;
-import io.mymetavese.metaapi.api.entities.GameEntity;
-import io.mymetavese.metaapi.api.entities.Token;
+import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.requests.routes.RouteAdapter;
 import io.mymetavese.metaapi.requests.routes.V2;
 import io.mymetavese.metaapi.requests.token.TokenHandler;
@@ -16,15 +15,6 @@ public interface MetaAPI {
      * @return A player with their possible actions.
      */
     GameEntity buildPlayer(String playerID);
-
-    /**
-     * Build a new token ready to execute actions.
-     *
-     * @param id    The ID of this token.
-     * @param index The index of this token.
-     * @return The token ready to execute actions.
-     */
-    Token buildToken(String id, String index);
 
     final class Builder {
         private TokenHandler tokenHandler;

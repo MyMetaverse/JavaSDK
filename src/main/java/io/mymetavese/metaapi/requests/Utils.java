@@ -1,13 +1,15 @@
 package io.mymetavese.metaapi.requests;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import io.mymetavese.metaapi.api.MetaAPI;
-import io.mymetavese.metaapi.requests.entities.TokenImpl;
 import lombok.SneakyThrows;
 import okhttp3.Response;
 
-import java.lang.reflect.Field;
+import java.io.Reader;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class Utils {
 
@@ -15,6 +17,14 @@ public class Utils {
 
     @SneakyThrows
     public static <T> T transformElement(Response response, Class<? extends T> as, MetaAPI metaAPI) {
-        return gson.fromJson(Objects.requireNonNull(response.body()).charStream(), as);
+        Reader reader = Objects.requireNonNull(response.body()).charStream();
+        return gson.fromJson(reader, as);
     }
+
+    public static  <T> T preventNull (JsonObject jsonObject, String k, Function<JsonElement, T> something, T t) {
+        if (!jsonObject.has(k))
+            return t;
+        return something.apply(jsonObject.get(k));
+    }
+
 }

@@ -8,6 +8,7 @@ import io.mymetavese.metaapi.api.RequestError;
 import io.mymetavese.metaapi.api.RestAction;
 import io.mymetavese.metaapi.requests.routes.Routes;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import okhttp3.Response;
 
 import java.util.HashMap;
@@ -65,10 +66,16 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
         request.onSuccess(transform(response));
     }
 
+    @SneakyThrows
     public void handleFailure(Request<T> request, Response badResponse) {
         Gson gson = new Gson();
-        RequestError requestError = gson.fromJson(Objects.requireNonNull(badResponse.body()).charStream(), RequestError.class);
-        request.onFailure(requestError);
+        String data = Objects.requireNonNull(badResponse.body()).string();
+        try {
+            RequestError requestError = gson.fromJson(data, RequestError.class);
+            request.onFailure(requestError);
+        } catch (Exception ex) {
+            throw new IllegalStateException(data);
+        }
     }
 
     @Override

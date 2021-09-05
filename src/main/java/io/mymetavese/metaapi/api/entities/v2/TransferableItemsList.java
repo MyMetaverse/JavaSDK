@@ -1,19 +1,21 @@
-package io.mymetavese.metaapi.api.entities;
+package io.mymetavese.metaapi.api.entities.v2;
+
+import io.mymetavese.metaapi.api.entities.LiveWalletItem;
 
 import java.util.List;
 
-public interface TradeableItemsList {
+public interface TransferableItemsList {
 
     /**
      * Items that are tradeable by the initiator of the trade.
      * @return A List filled with {@link LiveWalletItem}s
      */
-    List<? extends LiveWalletItem> getInitiatorItems();
+    List<? extends WalletItem> getInitiatorWallet();
 
     /**
      * Items that are tradeable by the receiver of the trade.
      * @return A List filled with {@link LiveWalletItem}s
      */
-    List<? extends LiveWalletItem> getReceiverItems();
+    List<? extends WalletItem> getReceiverWallet();
 
 }

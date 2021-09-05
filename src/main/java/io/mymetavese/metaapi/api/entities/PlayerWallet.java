@@ -1,5 +1,7 @@
 package io.mymetavese.metaapi.api.entities;
 
+import io.mymetavese.metaapi.api.entities.v2.WalletItem;
+
 import java.util.ArrayList;
 import java.util.List;
 

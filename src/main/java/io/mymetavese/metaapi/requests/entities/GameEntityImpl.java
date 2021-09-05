@@ -2,10 +2,14 @@ package io.mymetavese.metaapi.requests.entities;
 
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.*;
-import io.mymetavese.metaapi.api.entities.GameEntity;
+import io.mymetavese.metaapi.api.actions.v2.GetTransferableItems;
 import io.mymetavese.metaapi.api.entities.Item;
-import io.mymetavese.metaapi.api.entities.Token;
-import io.mymetavese.metaapi.requests.actions.*;
+import io.mymetavese.metaapi.api.entities.v2.GameEntity;
+import io.mymetavese.metaapi.requests.actions.CreateLinkingLinkActionImpl;
+import io.mymetavese.metaapi.requests.actions.EthAddressActionImpl;
+import io.mymetavese.metaapi.requests.actions.GetLinkingLinkActionImpl;
+import io.mymetavese.metaapi.requests.actions.WalletActionImpl;
+import io.mymetavese.metaapi.requests.actions.v2.GetTransferableItemsImpl;
 import lombok.Getter;
 
 import java.util.List;
@@ -38,8 +42,8 @@ public class GameEntityImpl implements GameEntity {
     }
 
     @Override
-    public GetTradeableItems fetchTrades(GameEntity target) {
-        return new GetTradeableItemsImpl(metaAPI, this, target);
+    public GetTransferableItems fetchTrades(GameEntity target) {
+        return new GetTransferableItemsImpl(metaAPI, this, target);
     }
 
     @Override
@@ -50,11 +54,6 @@ public class GameEntityImpl implements GameEntity {
     @Override
     public GetLinkingLink getLinkingLink() {
         return new GetLinkingLinkActionImpl(metaAPI, this);
-    }
-
-    @Override
-    public DepositAction deposit(List<Token> items) {
-        return new DepositActionImpl(metaAPI, this, items);
     }
 
 }

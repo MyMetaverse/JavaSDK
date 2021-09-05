@@ -2,13 +2,16 @@ package io.mymetavese.metaapi.requests.entities;
 
 import com.google.gson.annotations.SerializedName;
 import io.mymetavese.metaapi.api.MetaAPI;
-import io.mymetavese.metaapi.api.entities.WalletItem;
+import io.mymetavese.metaapi.api.entities.v2.WalletIndex;
+import io.mymetavese.metaapi.api.entities.v2.WalletItem;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
+@Data
 public class WalletItemImpl implements WalletItem {
 
     @Getter
@@ -22,7 +25,7 @@ public class WalletItemImpl implements WalletItem {
 
     @Getter
     @SerializedName("indices")
-    private final List<String> tokenIndexes;
+    private final Set<String> tokenIndexes;
 
     @Getter
     @SerializedName("nft")
@@ -47,4 +50,19 @@ public class WalletItemImpl implements WalletItem {
                 ", metadata='" + metadata + '\'' +
                 '}';
     }
+
+    @Override
+    public WalletIndex getIndex(String index) {
+        if(!NFT)
+            throw new IllegalArgumentException("This method is only usable in Non-Fungible Tokens.");
+
+        if(!tokenIndexes.contains(index))
+            throw new NullPointerException("This wallet doesn't contain index " + index);
+
+        return new WalletIndexImpl(
+                metaAPI,
+                index,
+                this);
+    }
+
 }

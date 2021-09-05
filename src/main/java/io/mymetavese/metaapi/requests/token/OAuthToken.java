@@ -27,7 +27,7 @@ public class OAuthToken implements TokenHandler {
 
     }
 
-    // Token Hybrid
+    // WalletIndex Hybrid
     private long tokenExpireTime = 0;
     private String accessToken;
     private String refreshToken;
@@ -77,7 +77,7 @@ public class OAuthToken implements TokenHandler {
 
             this.accessToken = tokenResponse.accessToken;
             this.refreshToken = tokenResponse.refreshToken;
-            this.tokenExpireTime = System.currentTimeMillis() + tokenResponse.expiresIn;
+            this.tokenExpireTime = System.currentTimeMillis() + (tokenResponse.expiresIn * 1000L);
 
         } catch (IOException ex) {
             ex.printStackTrace();

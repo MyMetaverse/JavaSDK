@@ -1,11 +1,9 @@
 package io.mymetavese.metaapi;
 
 import io.mymetavese.metaapi.api.MetaAPI;
-import io.mymetavese.metaapi.api.entities.GameEntity;
-import io.mymetavese.metaapi.api.entities.Token;
+import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.requests.RequestGenerator;
 import io.mymetavese.metaapi.requests.entities.GameEntityImpl;
-import io.mymetavese.metaapi.requests.entities.TokenImpl;
 import io.mymetavese.metaapi.requests.routes.RouteAdapter;
 import io.mymetavese.metaapi.requests.routes.V2;
 import io.mymetavese.metaapi.requests.token.TokenHandler;
@@ -53,11 +51,6 @@ public class MetaAPIImpl implements MetaAPI {
 
     public GameEntity buildPlayer(String playerID) {
         return new GameEntityImpl(this, playerID);
-    }
-
-    @Override
-    public Token buildToken(String id, String index) {
-        return new TokenImpl(this, id, index, 0);
     }
 
 }
