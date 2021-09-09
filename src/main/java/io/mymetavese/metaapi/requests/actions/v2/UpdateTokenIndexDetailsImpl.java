@@ -27,11 +27,13 @@ public class UpdateTokenIndexDetailsImpl extends RestActionImpl<WalletItem> impl
         return route.compileRoute(walletIndex.getBaseNFT().getTokenId(), walletIndex.getIndex());
     }
 
+    @Override
     public UpdateTokenIndexDetailsImpl setName(String name) {
         this.name = name;
         return this;
     }
 
+    @Override
     public UpdateTokenIndexDetailsImpl setDescription(String description) {
         this.description = description;
         return this;
