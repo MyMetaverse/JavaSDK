@@ -24,7 +24,7 @@ public class WalletItemImpl implements WalletItem {
     private final String tokenId;
 
     @Getter
-    @SerializedName("indices")
+    @SerializedName("indexes")
     private final Set<String> tokenIndexes;
 
     @Getter

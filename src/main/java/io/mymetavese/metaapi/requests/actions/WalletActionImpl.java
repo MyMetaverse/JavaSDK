@@ -48,8 +48,8 @@ public class WalletActionImpl extends RestActionImpl<PlayerWallet> implements Wa
                 .map(o -> new WalletItemImpl(this.getMetaAPI(),
                         Utils.preventNull(o, "name", JsonElement::getAsString, null),
                         Utils.preventNull(o, "tokenId", JsonElement::getAsString, null),
-                        Utils.preventNull(o, "indices", el ->
-                            StreamSupport.stream(o.get("indices").getAsJsonArray().spliterator(), false)
+                        Utils.preventNull(o, "indexes", el ->
+                            StreamSupport.stream(o.get("indexes").getAsJsonArray().spliterator(), false)
                                     .map(JsonElement::getAsString).collect(Collectors.toSet())
                         , null),
                         Utils.preventNull(o, "nft", JsonElement::getAsBoolean, null),
@@ -63,8 +63,8 @@ public class WalletActionImpl extends RestActionImpl<PlayerWallet> implements Wa
                         .map(o -> new WalletItemImpl(this.getMetaAPI(),
                                 Utils.preventNull(o, "name", JsonElement::getAsString, null),
                                 Utils.preventNull(o, "tokenId", JsonElement::getAsString, null),
-                                Utils.preventNull(o, "indices", el ->
-                                                StreamSupport.stream(o.get("indices").getAsJsonArray().spliterator(), false)
+                                Utils.preventNull(o, "indexes", el ->
+                                                StreamSupport.stream(o.get("indexes").getAsJsonArray().spliterator(), false)
                                                         .map(JsonElement::getAsString).collect(Collectors.toSet())
                                         , null),
                                 Utils.preventNull(o, "nft", JsonElement::getAsBoolean, null),
