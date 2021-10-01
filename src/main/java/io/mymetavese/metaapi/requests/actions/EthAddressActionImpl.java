@@ -3,7 +3,7 @@ package io.mymetavese.metaapi.requests.actions;
 import com.google.gson.Gson;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.EthAddressAction;
-import io.mymetavese.metaapi.api.entities.GameEntity;
+import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.requests.RestActionImpl;
 import io.mymetavese.metaapi.requests.routes.Routes;
 import okhttp3.Response;

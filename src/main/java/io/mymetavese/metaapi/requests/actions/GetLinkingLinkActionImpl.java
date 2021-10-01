@@ -2,7 +2,7 @@ package io.mymetavese.metaapi.requests.actions;
 
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.GetLinkingLink;
-import io.mymetavese.metaapi.api.entities.GameEntity;
+import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.api.entities.LinkingLink;
 import io.mymetavese.metaapi.requests.RestActionImpl;
 import io.mymetavese.metaapi.requests.entities.LinkingLinkImpl;

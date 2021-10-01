@@ -21,8 +21,8 @@ public class LiveWalletDeserializer implements JsonDeserializer<List<LiveWalletI
             List<ItemIndex> itemIndices = new ArrayList<>();
             List<Object> locked = new ArrayList<>();
 
-            if(jsonObject.has("token_indexes"))
-                for (JsonElement token_indexes : jsonObject.getAsJsonArray("token_indexes"))
+            if(jsonObject.has("indices"))
+                for (JsonElement token_indexes : jsonObject.getAsJsonArray("indices"))
                     itemIndices.add(new ItemIndex(null, token_indexes.getAsString()));
 
             JsonElement lockedAsJson = jsonObject.get("locked");

@@ -23,7 +23,7 @@ and with our authentication method.
 
 ```java
 MetaAPI metaAPI = MetaAPI.Builder.createBuilder()
-            .withToken("<token>")
+            .withToken("<walletIndex>")
             .build();
 ```
 

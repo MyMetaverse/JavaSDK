@@ -1,13 +1,13 @@
-package io.mymetavese.metaapi.api.entities;
+package io.mymetavese.metaapi.api.entities.v2;
 
-import java.util.List;
+import java.util.Set;
 
 public interface WalletItem {
 
     /**
      * The token is the ID used to identify this Item in the blockchain.
      *
-     * @return A string representing the Token ID for this Item.
+     * @return A string representing the WalletIndex ID for this Item.
      */
     String getTokenId();
 
@@ -23,7 +23,9 @@ public interface WalletItem {
      *
      * @return A List with ItemIndices owned by a player.
      */
-    List<String> getTokenIndexes();
+    Set<String> getTokenIndexes();
+
+    WalletIndex getIndex(String index);
 
     /**
      * Return a integer that represents how many of this items owns a player.

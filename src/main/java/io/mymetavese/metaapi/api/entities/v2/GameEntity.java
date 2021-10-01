@@ -1,7 +1,9 @@
-package io.mymetavese.metaapi.api.entities;
+package io.mymetavese.metaapi.api.entities.v2;
 
 import io.mymetavese.metaapi.api.ApiEntity;
 import io.mymetavese.metaapi.api.actions.*;
+import io.mymetavese.metaapi.api.actions.v2.GetTransferableItems;
+import io.mymetavese.metaapi.api.entities.Item;
 
 import java.util.List;
 
@@ -36,7 +38,7 @@ public interface GameEntity extends ApiEntity {
      * @param target The target player we want to review.
      * @return An action that represents the result of possible trades.
      */
-    GetTradeableItems fetchTrades(GameEntity target);
+    GetTransferableItems fetchTrades(GameEntity target);
 
     /**
      * Create linking link for the player.
@@ -51,14 +53,6 @@ public interface GameEntity extends ApiEntity {
      * @return An action that represents the linking link.
      */
     GetLinkingLink getLinkingLink();
-
-    /**
-     * Use this to deposit items from LiveWallet to EnjinWallet
-     *
-     * @param items The items to be deposited into EnjinWallet
-     * @return An action that represents the result of this deposit.
-     */
-    DepositAction deposit(List<Token> items);
 
     /**
      * @return The used PlayerID for this instance.

@@ -2,7 +2,7 @@ package io.mymetavese.metaapi.requests.actions;
 
 import io.mymetavese.metaapi.MetaAPIImpl;
 import io.mymetavese.metaapi.api.actions.TradeRequestAction;
-import io.mymetavese.metaapi.api.entities.GameEntity;
+import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.api.entities.TradeRequest;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
