@@ -10,6 +10,11 @@ import java.util.List;
 public interface GameEntity extends ApiEntity {
 
     /**
+     * @return The used PlayerID for this instance.
+     */
+    String getPlayerID();
+
+    /**
      * Use this fetch everything related to player's wallet.
      *
      * @return A representation of the action to fetch the player's wallet.
@@ -55,8 +60,10 @@ public interface GameEntity extends ApiEntity {
     GetLinkingLink getLinkingLink();
 
     /**
-     * @return The used PlayerID for this instance.
+     * Get the currently active metacitizen for this game entity.
+     *
+     * @return An action representing the index of the active metaCitizen.
      */
-    String getPlayerID();
+    GetMetaCitizenAction getActiveMetaCitizen();
 
 }
