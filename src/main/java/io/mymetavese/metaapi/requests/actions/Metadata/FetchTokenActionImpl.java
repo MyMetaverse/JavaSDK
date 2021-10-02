@@ -49,13 +49,13 @@ public class FetchTokenActionImpl extends RestActionImpl<TokenMetadata> implemen
         JsonObject secondFill = gson.fromJson(data, JsonObject.class);
 
         Set<IndexProperty> props = Utils.preventNull(secondFill, "properties", jsonElement ->
-            jsonElement.getAsJsonObject().keySet().stream()
-                    .map(keyName -> {
-                        JsonElement el = jsonElement.getAsJsonObject().get(keyName);
+            jsonElement.getAsJsonObject().entrySet().stream()
+                    .map(entry -> {
+                        JsonElement el = jsonElement.getAsJsonObject().get(entry.getKey());
                         return new IndexPropertyImpl(
                                 this.getMetaAPI(),
                                 (WalletIndexImpl) walletIndex,
-                                keyName,
+                                entry.getKey(),
                                 false,
                                 gson.toJson(el),
                                 el);
@@ -65,13 +65,13 @@ public class FetchTokenActionImpl extends RestActionImpl<TokenMetadata> implemen
         , new HashSet<>());
 
         Set<IndexProperty> hiddenProps = Utils.preventNull(secondFill, "hiddenProperties", jsonElement ->
-                        jsonElement.getAsJsonObject().keySet().stream()
-                                .map(keyName -> {
-                                    JsonElement el = jsonElement.getAsJsonObject().get(keyName);
+                        jsonElement.getAsJsonObject().entrySet().stream()
+                                .map(entry -> {
+                                    JsonElement el = jsonElement.getAsJsonObject().get(entry.getKey());
                                     return new IndexPropertyImpl(
                                             this.getMetaAPI(),
                                             (WalletIndexImpl) walletIndex,
-                                            keyName,
+                                            entry.getKey(),
                                             true,
                                             gson.toJson(el),
                                             el);
