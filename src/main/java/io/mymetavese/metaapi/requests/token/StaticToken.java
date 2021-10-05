@@ -14,4 +14,6 @@ public class StaticToken implements TokenHandler {
         return new StaticToken(token);
     }
 
+    @Override
+    public void reauthenticate() { }
 }

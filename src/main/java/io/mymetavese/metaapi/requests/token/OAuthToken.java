@@ -98,6 +98,11 @@ public class OAuthToken implements TokenHandler {
         return accessToken;
     }
 
+    @Override
+    public void reauthenticate() {
+        this.requestToken(true);
+    }
+
     private static class TokenResponse {
         @SerializedName("access_token")
         private String accessToken;

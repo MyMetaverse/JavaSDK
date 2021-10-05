@@ -58,9 +58,20 @@ public class RequestGenerator {
                 throw new IOException("Internal server error: " + response.body().string());
             }
 
+            if(response.code() == 401 && request.getAttempts() < 2) {
+                request.addAttempt();
+                api.getTokenHandler().reauthenticate();
+                this.request(request);
+                return;
+            }
+
             request.handleResponse(response);
         } catch (IOException ex) {
             ex.printStackTrace();
+
+            if(request.getAttempts() < 2) {
+                this.request(request);
+            }
         }
 
     }
