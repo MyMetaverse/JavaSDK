@@ -5,10 +5,7 @@ import io.mymetavese.metaapi.api.actions.*;
 import io.mymetavese.metaapi.api.actions.v2.GetTransferableItems;
 import io.mymetavese.metaapi.api.entities.Item;
 import io.mymetavese.metaapi.api.entities.v2.GameEntity;
-import io.mymetavese.metaapi.requests.actions.CreateLinkingLinkActionImpl;
-import io.mymetavese.metaapi.requests.actions.EthAddressActionImpl;
-import io.mymetavese.metaapi.requests.actions.GetLinkingLinkActionImpl;
-import io.mymetavese.metaapi.requests.actions.WalletActionImpl;
+import io.mymetavese.metaapi.requests.actions.*;
 import io.mymetavese.metaapi.requests.actions.v2.GetTransferableItemsImpl;
 import lombok.Getter;
 
@@ -54,6 +51,11 @@ public class GameEntityImpl implements GameEntity {
     @Override
     public GetLinkingLink getLinkingLink() {
         return new GetLinkingLinkActionImpl(metaAPI, this);
+    }
+
+    @Override
+    public GetMetaCitizenAction getActiveMetaCitizen() {
+        return new GetMetaCitizenActionImpl(metaAPI, this);
     }
 
 }
