@@ -24,11 +24,13 @@ public class V2 extends RouteAdapter {
         this.routes.put("UPDATE_TOKEN_PROPERTY", new Route(POST, "/tokens/{tokenId}/{propertyName}"));
         this.routes.put("DELETE_TOKEN_PROPERTY", new Route(DELETE, "/tokens/{tokenId}/{propertyName}"));
 
-        this.routes.put("UPDATE_TOKEN_INDEX_DETAILS", new Route(POST, "/tokens/{tokenId}/indexes/{tokenIndex}"));
+        this.routes.put("UPDATE_TOKEN_INDEX_DETAILS", new Route(PUT, "/tokens/{tokenId}/indexes/{tokenIndex}"));
         this.routes.put("UPDATE_TOKEN_INDEX_PROPERTY", new Route(PUT, "/tokens/{tokenId}/indexes/{tokenIndex}/properties/{propertyName}"));
         this.routes.put("DELETE_TOKEN_INDEX_PROPERTY", new Route(DELETE, "/tokens/{tokenId}/indexes/{tokenIndex}/properties/{propertyName}"));
 
         this.routes.put("GET_ACTIVE_META_CITIZEN", new Route(GET, "/users/{userId}/wallet/metacitizen"));
+
+        this.routes.put("GIVE_WHITELISTED_TOKEN", new Route(POST, "/tokens/{tokenId}/give"));
 
     }
 
