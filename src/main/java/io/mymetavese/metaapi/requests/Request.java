@@ -18,6 +18,9 @@ public class Request<T> {
     private final JsonObject requestBody;
     private final Map<String, String> headers;
 
+    @Getter
+    private int attempts = 0;
+
     private final Consumer<? super T> success;
     private final Consumer<? super RequestError> failure;
 
@@ -49,4 +52,9 @@ public class Request<T> {
         }
 
     }
+
+    public void addAttempt() {
+        this.attempts++;
+    }
+
 }
