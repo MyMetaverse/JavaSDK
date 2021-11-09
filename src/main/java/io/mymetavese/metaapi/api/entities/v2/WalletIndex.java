@@ -1,6 +1,7 @@
 package io.mymetavese.metaapi.api.entities.v2;
 
 import io.mymetavese.metaapi.api.MetaAPI;
+import io.mymetavese.metaapi.api.actions.GiveWhitelistedTokenAction;
 import io.mymetavese.metaapi.api.actions.Metadata.FetchTokenAction;
 import io.mymetavese.metaapi.api.actions.v2.DeleteTokenIndexProperty;
 import io.mymetavese.metaapi.api.actions.v2.UpdateTokenIndexDetails;
@@ -39,5 +40,7 @@ public interface WalletIndex {
     UpdateTokenIndexDetails updateDetails();
 
     FetchTokenAction fill();
+
+    GiveWhitelistedTokenAction give(GameEntity receiverEntity);
 
 }

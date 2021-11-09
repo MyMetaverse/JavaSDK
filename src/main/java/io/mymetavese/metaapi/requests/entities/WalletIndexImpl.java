@@ -1,13 +1,16 @@
 package io.mymetavese.metaapi.requests.entities;
 
 import io.mymetavese.metaapi.api.MetaAPI;
+import io.mymetavese.metaapi.api.actions.GiveWhitelistedTokenAction;
 import io.mymetavese.metaapi.api.actions.Metadata.FetchTokenAction;
 import io.mymetavese.metaapi.api.actions.v2.DeleteTokenIndexProperty;
 import io.mymetavese.metaapi.api.actions.v2.UpdateTokenIndexDetails;
 import io.mymetavese.metaapi.api.actions.v2.UpdateTokenIndexProperty;
+import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.api.entities.v2.IndexProperty;
 import io.mymetavese.metaapi.api.entities.v2.WalletIndex;
 import io.mymetavese.metaapi.api.entities.v2.WalletItem;
+import io.mymetavese.metaapi.requests.actions.GiveWhitelistedTokenActionImpl;
 import io.mymetavese.metaapi.requests.actions.Metadata.FetchTokenActionImpl;
 import io.mymetavese.metaapi.requests.actions.v2.DeleteTokenIndexPropertyImpl;
 import io.mymetavese.metaapi.requests.actions.v2.UpdateTokenIndexDetailsImpl;
@@ -58,4 +61,10 @@ public class WalletIndexImpl implements WalletIndex {
     public FetchTokenAction fill() {
         return new FetchTokenActionImpl(metaAPI, this);
     }
+
+    @Override
+    public GiveWhitelistedTokenAction give(GameEntity receiverEntity) {
+        return new GiveWhitelistedTokenActionImpl(metaAPI, this, receiverEntity);
+    }
+
 }

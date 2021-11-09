@@ -40,7 +40,7 @@ public class OAuthToken implements TokenHandler {
 
     private void requestToken(boolean withCredentials) {
         Request.Builder builder = new Request.Builder();
-        String baseUrl = "devcloud.mymetaverse.io";
+        String baseUrl = "cloud.mymetaverse.io";
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
 
