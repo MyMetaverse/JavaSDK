@@ -18,9 +18,12 @@ public class OAuthToken implements TokenHandler {
     private final String clientId;
     private final String clientSecret;
 
-    private OAuthToken(final String clientId, final String clientSecret) {
+    private final String baseAuthUrl;
+
+    private OAuthToken(final String clientId, final String clientSecret, final String baseAuthUrl) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
+        this.baseAuthUrl = baseAuthUrl;
 
         this.httpClient = new OkHttpClient();
         this.gson = new Gson();
@@ -40,13 +43,12 @@ public class OAuthToken implements TokenHandler {
 
     private void requestToken(boolean withCredentials) {
         Request.Builder builder = new Request.Builder();
-        String baseUrl = "cloud.mymetaverse.io";
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
 
         urlBuilder
                 .scheme("https")
-                .host(baseUrl)
+                .host(baseAuthUrl)
                 .addPathSegment("oauth2")
                 .addPathSegment("token");
 
@@ -86,7 +88,13 @@ public class OAuthToken implements TokenHandler {
     }
 
     public static OAuthToken create(final String clientId, final String clientSecret) {
-        OAuthToken tokenHandler = new OAuthToken(clientId, clientSecret);
+        OAuthToken tokenHandler = new OAuthToken(clientId, clientSecret, "cloud.mymetaverse.io");
+        tokenHandler.requestToken(true);
+        return tokenHandler;
+    }
+
+    public static OAuthToken create(final String clientId, final String clientSecret, final String baseAuthUrl) {
+        OAuthToken tokenHandler = new OAuthToken(clientId, clientSecret, baseAuthUrl);
         tokenHandler.requestToken(true);
         return tokenHandler;
     }

@@ -70,6 +70,7 @@ public class RequestGenerator {
             ex.printStackTrace();
 
             if(request.getAttempts() < 2) {
+                request.addAttempt();
                 this.request(request);
             }
         }
