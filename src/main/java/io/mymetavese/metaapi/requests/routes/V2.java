@@ -32,6 +32,8 @@ public class V2 extends RouteAdapter {
 
         this.routes.put("GIVE_WHITELISTED_TOKEN", new Route(POST, "/tokens/{tokenId}/give"));
 
+        this.routes.put("GET_POINTS", new Route(GET, "/users/{userId}/p2e/points"));
+        this.routes.put("POST_POINTS", new Route(POST, "/users/{userId}/p2e/points"));
     }
 
 }
