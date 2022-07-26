@@ -44,13 +44,13 @@ jobs:
 
       - name: Install Plugins
         run: | 
-          npm install -g @semantic-release/release-notes-generator @semantic-release/commit-analyzer @semantic-release/changelog @semantic-release/github @semantic-release/git
+          npm install -g semantic-release @semantic-release/release-notes-generator @semantic-release/commit-analyzer @semantic-release/changelog @semantic-release/github @semantic-release/git
 
       - name: Release
         id: release
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
-        run: npx semantic-release
+        run: semantic-release
     outputs:
       release_version: ${{ steps.release.outputs.release_version }}
 
