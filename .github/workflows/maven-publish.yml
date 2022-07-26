@@ -42,6 +42,10 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: Install Plugins
+        run: | 
+          npm install -g @semantic-release/release-notes-generator @semantic-release/commit-analyzer @semantic-release/changelog @semantic-release/github @semantic-release/git
+
       - name: Release
         id: release
         env:
