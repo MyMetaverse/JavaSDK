@@ -8,6 +8,7 @@ import okhttp3.Response;
 import okhttp3.internal.http.HttpMethod;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class RequestGenerator {
 
@@ -55,7 +56,7 @@ public class RequestGenerator {
 
         try(Response response = httpClient.newCall(builder.build()).execute()) {
             if (response.code() >= 500) {
-                throw new IOException("Internal server error: " + response.body().string());
+                throw new IOException("Internal server error: " + Objects.requireNonNull(response.body()).string());
             }
 
             if(response.code() == 401 && request.getAttempts() < 2) {
