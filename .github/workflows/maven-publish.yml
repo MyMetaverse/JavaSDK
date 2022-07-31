@@ -55,7 +55,7 @@ jobs:
       release_version: ${{ steps.release.outputs.release_version }}
 
   publish_package:
-    if: ${{ needs.release.outputs.released_version != '' }}
+    if: ${{ needs.release.outputs.release_version != '' }}
     runs-on: ubuntu-latest
     needs: [ release ]
 
