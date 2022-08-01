@@ -68,5 +68,5 @@ public interface GameEntity extends ApiEntity {
 
     GetPointsAction getPoints();
 
-    AddPointsAction addPoints();
+    AddPointsAction addPoints(int points);
 }
