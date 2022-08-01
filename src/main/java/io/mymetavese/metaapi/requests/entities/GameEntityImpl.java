@@ -58,4 +58,13 @@ public class GameEntityImpl implements GameEntity {
         return new GetMetaCitizenActionImpl(metaAPI, this);
     }
 
+    @Override
+    public GetPointsAction getPoints() {
+        return new GetPointsActionImpl(metaAPI, this);
+    }
+
+    @Override
+    public AddPointsAction addPoints() {
+        return new AddPointsActionImpl(metaAPI, this);
+    }
 }

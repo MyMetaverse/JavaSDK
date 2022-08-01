@@ -25,5 +25,5 @@ public enum Routes {
     GIVE_WHITELISTED_TOKEN,
 
     GET_POINTS,
-    POST_POINTS
+    ADD_POINTS
 }
