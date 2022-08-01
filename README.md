@@ -67,7 +67,7 @@ dependencies {
 
 ## Documentation
 
-Docs can be found HERE.
+Docs can be found "HERE".
 
 ## Help
 
