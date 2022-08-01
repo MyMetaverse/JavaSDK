@@ -64,7 +64,8 @@ public class GameEntityImpl implements GameEntity {
     }
 
     @Override
-    public AddPointsAction addPoints() {
-        return new AddPointsActionImpl(metaAPI, this);
+    public AddPointsAction addPoints(int points) {
+        return new AddPointsActionImpl(metaAPI, this, points);
     }
+    
 }
