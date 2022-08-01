@@ -66,4 +66,7 @@ public interface GameEntity extends ApiEntity {
      */
     GetMetaCitizenAction getActiveMetaCitizen();
 
+    GetPointsAction getPoints();
+
+    AddPointsAction addPoints();
 }

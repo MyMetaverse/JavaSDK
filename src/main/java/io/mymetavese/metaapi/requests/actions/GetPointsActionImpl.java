@@ -12,11 +12,11 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Objects;
 
-public class GetPointsImpl extends RestActionImpl<String> implements GetPointsAction {
+public class GetPointsActionImpl extends RestActionImpl<String> implements GetPointsAction {
 
     private final String playerID;
 
-    public GetPointsImpl(MetaAPI api, GameEntity gameEntity) {
+    public GetPointsActionImpl(MetaAPI api, GameEntity gameEntity) {
         super(api, Routes.GET_POINTS);
         this.playerID = gameEntity.getPlayerID();
     }
