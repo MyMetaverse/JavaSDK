@@ -67,4 +67,5 @@ public class GameEntityImpl implements GameEntity {
     public AddPointsAction addPoints(int points) {
         return new AddPointsActionImpl(metaAPI, this, points);
     }
+    
 }

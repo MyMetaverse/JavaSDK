@@ -65,8 +65,15 @@ public interface GameEntity extends ApiEntity {
      * @return An action representing the index of the active metaCitizen.
      */
     GetMetaCitizenAction getActiveMetaCitizen();
-
+    
+    /*
+    * Get the P&E points for the player.
+    */
     GetPointsAction getPoints();
-
+    
+    /*
+    * Add P&E points to the player.
+    */
     AddPointsAction addPoints(int points);
+    
 }
