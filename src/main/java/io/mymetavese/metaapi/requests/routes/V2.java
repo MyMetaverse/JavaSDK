@@ -10,6 +10,7 @@ public class V2 extends RouteAdapter {
 
 
     public V2() {
+
         super("https://cloud.mymetaverse.io/adopters", new HashMap<>());
 
         this.routes.put("GET_WALLET", new Route(GET, "/users/{userId}/wallet"));
@@ -32,8 +33,9 @@ public class V2 extends RouteAdapter {
 
         this.routes.put("GIVE_WHITELISTED_TOKEN", new Route(POST, "/tokens/{tokenId}/give"));
 
-        this.routes.put("GET_POINTS", new Route(GET, "/users/{userId}/p2e/points"));
-        this.routes.put("POST_POINTS", new Route(POST, "/users/{userId}/p2e/points"));
+        this.routes.put("GET_P2E_POINTS", new Route(GET, "/users/{userId}/p2e/points"));
+        this.routes.put("ADD_P2E_POINTS", new Route(POST, "/users/{userId}/p2e/points"));
+
     }
 
 }
