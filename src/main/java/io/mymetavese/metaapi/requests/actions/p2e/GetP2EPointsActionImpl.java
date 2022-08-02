@@ -1,10 +1,12 @@
-package io.mymetavese.metaapi.requests.actions;
+package io.mymetavese.metaapi.requests.actions.p2e;
 
 import com.google.gson.Gson;
 import io.mymetavese.metaapi.api.MetaAPI;
-import io.mymetavese.metaapi.api.actions.GetPointsAction;
+import io.mymetavese.metaapi.api.actions.p2e.GetP2EPointsAction;
+import io.mymetavese.metaapi.api.entities.P2EPoints;
 import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.requests.RestActionImpl;
+import io.mymetavese.metaapi.requests.entities.P2EPointsImpl;
 import io.mymetavese.metaapi.requests.routes.Routes;
 import okhttp3.Response;
 
@@ -12,12 +14,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Objects;
 
-public class GetPointsActionImpl extends RestActionImpl<String> implements GetPointsAction {
+public class GetP2EPointsActionImpl extends RestActionImpl<P2EPoints> implements GetP2EPointsAction {
 
     private final String playerID;
 
-    public GetPointsActionImpl(MetaAPI api, GameEntity gameEntity) {
-        super(api, Routes.GET_POINTS);
+    public GetP2EPointsActionImpl(MetaAPI api, GameEntity gameEntity) {
+        super(api, Routes.GET_P2E_POINTS);
         this.playerID = gameEntity.getPlayerID();
     }
 
@@ -27,7 +29,7 @@ public class GetPointsActionImpl extends RestActionImpl<String> implements GetPo
     }
 
     @Override
-    public String transform(Response response) {
+    public P2EPoints transform(Response response) {
 
         if (response == null || response.body() == null) {
             throw new NullPointerException("Response cannot be null");
@@ -35,16 +37,18 @@ public class GetPointsActionImpl extends RestActionImpl<String> implements GetPo
 
         Gson gson = new Gson();
         try (Reader reader = Objects.requireNonNull(response.body()).charStream()) {
-            return gson.fromJson(reader, PointsWrapper.class).balance;
+            return new P2EPointsImpl(gson.fromJson(reader, PointsWrapper.class).balance);
         } catch (IOException ex) {
-            // Ignored
+            ex.printStackTrace();
         }
 
-        return "0";
+        return null;
+
     }
 
     private static class PointsWrapper {
-        private String balance;
+        private int profileId;
+        private int balance;
     }
 
 }

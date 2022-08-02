@@ -2,6 +2,8 @@ package io.mymetavese.metaapi.api.entities.v2;
 
 import io.mymetavese.metaapi.api.ApiEntity;
 import io.mymetavese.metaapi.api.actions.*;
+import io.mymetavese.metaapi.api.actions.p2e.AddP2EPointsAction;
+import io.mymetavese.metaapi.api.actions.p2e.GetP2EPointsAction;
 import io.mymetavese.metaapi.api.actions.v2.GetTransferableItems;
 import io.mymetavese.metaapi.api.entities.Item;
 
@@ -69,11 +71,11 @@ public interface GameEntity extends ApiEntity {
     /*
     * Get the P&E points for the player.
     */
-    GetPointsAction getPoints();
+    GetP2EPointsAction getP2EPoints();
     
     /*
     * Add P&E points to the player.
     */
-    AddPointsAction addPoints(int points);
+    AddP2EPointsAction addP2EPoints(int points);
     
 }

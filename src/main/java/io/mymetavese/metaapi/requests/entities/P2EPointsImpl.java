@@ -1,14 +1,14 @@
 package io.mymetavese.metaapi.requests.entities;
 
-import io.mymetavese.metaapi.api.entities.Points;
+import io.mymetavese.metaapi.api.entities.P2EPoints;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class PointsImpl implements Points {
+public class P2EPointsImpl implements P2EPoints {
 
     @Getter
-    private final String points;
+    private final int points;
 
     @Override
     public String toString() {
