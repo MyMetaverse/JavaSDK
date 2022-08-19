@@ -1,22 +1,47 @@
 package io.mymetavese.metaapi.requests.actions.p2e;
 
+import com.google.gson.Gson;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.p2e.AddP2EPointsAction;
+import io.mymetavese.metaapi.api.entities.p2e.P2EResponse;
 import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.requests.JsonObject;
 import io.mymetavese.metaapi.requests.RestActionImpl;
-import io.mymetavese.metaapi.requests.entities.P2EPointsImpl;
+import io.mymetavese.metaapi.requests.entities.p2e.P2EResponseImpl;
 import io.mymetavese.metaapi.requests.routes.Routes;
+import okhttp3.Response;
 
-public class AddP2EPointsActionImpl extends RestActionImpl<P2EPointsImpl> implements AddP2EPointsAction {
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Objects;
+
+public class AddP2EPointsActionImpl extends RestActionImpl<P2EResponse> implements AddP2EPointsAction {
 
     private final String playerID;
     private final int points;
 
     public AddP2EPointsActionImpl(MetaAPI api, GameEntity gameEntity, int points) {
-        super(api, Routes.ADD_P2E_POINTS, P2EPointsImpl.class);
+        super(api, Routes.ADD_P2E_POINTS, P2EResponseImpl.class);
         this.playerID = gameEntity.getPlayerID();
         this.points = points;
+    }
+
+    @Override
+    public P2EResponse transform(Response response) {
+
+        if (response == null || response.body() == null) {
+            throw new NullPointerException("Response cannot be null");
+        }
+
+        Gson gson = new Gson();
+        try (Reader reader = Objects.requireNonNull(response.body()).charStream()) {
+            return gson.fromJson(reader, P2EResponseImpl.class);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+
     }
 
     @Override
