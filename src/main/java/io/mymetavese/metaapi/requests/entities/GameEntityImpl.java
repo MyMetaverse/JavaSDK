@@ -71,5 +71,10 @@ public class GameEntityImpl implements GameEntity {
     public AddP2EPointsAction addP2EPoints(int points) {
         return new AddP2EPointsActionImpl(metaAPI, this, points);
     }
+
+    @Override
+    public AddP2EPointsAction addP2EPoints(int points, String idempotencyKey) {
+        return new AddP2EPointsActionImpl(metaAPI, this, points, idempotencyKey);
+    }
     
 }
