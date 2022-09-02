@@ -14,6 +14,7 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Objects;
+import java.util.UUID;
 
 public class AddP2EPointsActionImpl extends RestActionImpl<P2EResponse> implements AddP2EPointsAction {
 
@@ -21,9 +22,23 @@ public class AddP2EPointsActionImpl extends RestActionImpl<P2EResponse> implemen
     private final int points;
 
     public AddP2EPointsActionImpl(MetaAPI api, GameEntity gameEntity, int points) {
+
         super(api, Routes.ADD_P2E_POINTS, P2EResponseImpl.class);
         this.playerID = gameEntity.getPlayerID();
         this.points = points;
+
+        addHeader("Idempotency-Key", UUID.randomUUID().toString());
+
+    }
+
+    public AddP2EPointsActionImpl(MetaAPI api, GameEntity gameEntity, int points, String idempotencyKey) {
+
+        super(api, Routes.ADD_P2E_POINTS, P2EResponseImpl.class);
+        this.playerID = gameEntity.getPlayerID();
+        this.points = points;
+
+        addHeader("Idempotency-Key", idempotencyKey);
+
     }
 
     @Override

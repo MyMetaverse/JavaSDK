@@ -67,15 +67,29 @@ public interface GameEntity extends ApiEntity {
      * @return An action representing the index of the active metaCitizen.
      */
     GetMetaCitizenAction getActiveMetaCitizen();
-    
-    /*
-    * Get the P&E points for the player.
-    */
+
+    /**
+     * Get P2E points for a specific player.
+     *
+     * @return an instance of {@link GetP2EPointsAction}
+     */
     GetP2EPointsAction getP2EPoints();
-    
-    /*
-    * Add P&E points to the player.
-    */
+
+    /**
+     * Add P2E points to player with random idempotency key.
+     *
+     * @param points the amount of points to add to the player account.
+     * @return an instance of {@link AddP2EPointsAction}
+     */
     AddP2EPointsAction addP2EPoints(int points);
-    
+
+    /**
+     * Add P2E points to player using specific idempotency key.
+     *
+     * @param points the amount of points to add to the player account.
+     * @param idempotencyKey key to identify the operation.
+     * @return an instance of {@link AddP2EPointsAction}
+     */
+    AddP2EPointsAction addP2EPoints(int points, String idempotencyKey);
+
 }
