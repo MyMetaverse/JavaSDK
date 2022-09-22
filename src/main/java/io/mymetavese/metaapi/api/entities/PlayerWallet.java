@@ -8,25 +8,51 @@ import java.util.List;
 public interface PlayerWallet {
 
     /**
-     * Retrieve the representation of an Enjin Wallet.
+     * Retrieve items in Enjin Wallet.
      * <br />
+     * Deprecated:
      *
      * @return A representation of the Enjin Wallet owned by this player.
      */
+    @Deprecated()
     List<? extends WalletItem> getEnjinWallet();
 
+    /**
+     * Retrieve Centralized items.
+     * <br />
+     * Deprecated: Should be replaced by
+     *
+     * @return A representation of the Enjin Wallet owned by this player.
+     */
+    @Deprecated
     List<? extends WalletItem> getMyMetaverseWallet();
 
     /**
-     * This will return all the items owned by this player, including {@link EnjinWallet} and all {@link LiveWalletItem}
+     * Retrieve items from chain
+     * <p>
+     * Get the player's items in the provided chain.
      *
-     * @return A list filled with the {@link Item}s owned by this player.
+     * @param chain the chain where the items will be obtained from.
+     * @return a list containing the player's items in the chain.
      */
-    default List<WalletItem> getAllItems() {
-        List<WalletItem> items = new ArrayList<>(getMyMetaverseWallet());
-        items.addAll(getEnjinWallet());
+    List<? extends WalletItem> getItemsByChain(String chain);
 
-        return items;
-    }
+    /**
+     * Retrieve Centralized items.
+     * <br />
+     * Deprecated: Should be replaced by
+     *
+     * @return a list containing the player's centralized items.
+     */
+    List<? extends WalletItem> getCentralizedItems();
+
+    /**
+     * Retrieve all items
+     * <p>
+     * Retrieve all player's items in all chains.
+     *
+     * @return A list filled with all the {@link Item}s owned by this player.
+     */
+    List<? extends WalletItem> getAllItems();
 
 }

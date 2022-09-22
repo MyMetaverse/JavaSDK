@@ -16,8 +16,8 @@ import io.mymetavese.metaapi.requests.routes.Routes;
 import okhttp3.Response;
 
 import java.io.Reader;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -41,37 +41,35 @@ public class WalletActionImpl extends RestActionImpl<PlayerWallet> implements Wa
 
         Reader reader = Objects.requireNonNull(response.body()).charStream();
         JsonObject json = gson.fromJson(reader, JsonObject.class);
-
-        List<WalletItemImpl> enjin =
-                StreamSupport.stream(json.get("enjinWallet").getAsJsonArray().spliterator(), false)
-                .map(JsonElement::getAsJsonObject)
-                .map(o -> new WalletItemImpl(this.getMetaAPI(),
-                        Utils.preventNull(o, "name", JsonElement::getAsString, null),
-                        Utils.preventNull(o, "tokenId", JsonElement::getAsString, null),
-                        Utils.preventNull(o, "indexes", el ->
-                            StreamSupport.stream(o.get("indexes").getAsJsonArray().spliterator(), false)
-                                    .map(JsonElement::getAsString).collect(Collectors.toSet())
+        Function<JsonObject, WalletItemImpl> mapJsonItemToWalletItem = o -> new WalletItemImpl(this.getMetaAPI(),
+                Utils.preventNull(o, "name", JsonElement::getAsString, null),
+                Utils.preventNull(o, "tokenId", JsonElement::getAsString, null),
+                Utils.preventNull(o, "indexes", el ->
+                                StreamSupport.stream(o.get("indexes").getAsJsonArray().spliterator(), false)
+                                        .map(JsonElement::getAsString).collect(Collectors.toSet())
                         , null),
-                        Utils.preventNull(o, "nft", JsonElement::getAsBoolean, null),
-                        Utils.preventNull(o, "amount", JsonElement::getAsInt, null),
-                        Utils.preventNull(o, "itemURI", JsonElement::getAsString, null))
-                ).collect(Collectors.toList());
+                Utils.preventNull(o, "nft", JsonElement::getAsBoolean, null),
+                Utils.preventNull(o, "amount", JsonElement::getAsInt, null),
+                Utils.preventNull(o, "itemURI", JsonElement::getAsString, null));
 
-        List<WalletItemImpl> meta =
-                StreamSupport.stream(json.get("liveWallet").getAsJsonArray().spliterator(), false)
-                        .map(JsonElement::getAsJsonObject)
-                        .map(o -> new WalletItemImpl(this.getMetaAPI(),
-                                Utils.preventNull(o, "name", JsonElement::getAsString, null),
-                                Utils.preventNull(o, "tokenId", JsonElement::getAsString, null),
-                                Utils.preventNull(o, "indexes", el ->
-                                                StreamSupport.stream(o.get("indexes").getAsJsonArray().spliterator(), false)
-                                                        .map(JsonElement::getAsString).collect(Collectors.toSet())
-                                        , null),
-                                Utils.preventNull(o, "nft", JsonElement::getAsBoolean, null),
-                                Utils.preventNull(o, "amount", JsonElement::getAsInt, null),
-                                Utils.preventNull(o, "itemURI", JsonElement::getAsString, null))
-                        ).collect(Collectors.toList());
+        List<WalletItemImpl> centralizedWallet = StreamSupport.stream(json.get("centralizedItems").getAsJsonArray().spliterator(), false)
+                .map(JsonElement::getAsJsonObject)
+                .map(mapJsonItemToWalletItem)
+                .collect(Collectors.toList());
 
-        return new PlayerWalletImpl(meta, enjin);
+        List<WalletItemImpl> lockedItems = StreamSupport.stream(json.get("lockedItems").getAsJsonArray().spliterator(), false)
+                .map(JsonElement::getAsJsonObject)
+                .map(mapJsonItemToWalletItem)
+                .collect(Collectors.toList());
+
+        Map<String, List<WalletItemImpl>> itemsInChains = json.get("chains").getAsJsonObject().entrySet()
+                .stream().map(chainEntry -> new AbstractMap.SimpleEntry<>(chainEntry.getKey(),
+                        StreamSupport.stream(json.get("lockedItems").getAsJsonArray().spliterator(), false)
+                                .map(JsonElement::getAsJsonObject)
+                                .map(mapJsonItemToWalletItem)
+                                .collect(Collectors.toList())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (prev, next) -> next, HashMap::new));
+
+        return new PlayerWalletImpl(centralizedWallet, lockedItems, itemsInChains);
     }
 }
