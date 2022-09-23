@@ -62,9 +62,11 @@ public class WalletActionImpl extends RestActionImpl<PlayerWallet> implements Wa
                 .map(mapJsonItemToWalletItem)
                 .collect(Collectors.toList());
 
-        Map<String, List<WalletItemImpl>> itemsInChains = json.get("chains").getAsJsonObject().entrySet()
+        JsonObject chainsJsonObject = json.get("chains").getAsJsonObject();
+
+        Map<String, List<WalletItemImpl>> itemsInChains = chainsJsonObject.entrySet()
                 .stream().map(chainEntry -> new AbstractMap.SimpleEntry<>(chainEntry.getKey(),
-                        StreamSupport.stream(json.get("lockedItems").getAsJsonArray().spliterator(), false)
+                        StreamSupport.stream(chainsJsonObject.get(chainEntry.getKey()).getAsJsonObject().get("items").getAsJsonArray().spliterator(), false)
                                 .map(JsonElement::getAsJsonObject)
                                 .map(mapJsonItemToWalletItem)
                                 .collect(Collectors.toList())))

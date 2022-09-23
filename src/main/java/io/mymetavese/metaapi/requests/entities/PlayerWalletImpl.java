@@ -4,7 +4,6 @@ import io.mymetavese.metaapi.api.entities.PlayerWallet;
 import io.mymetavese.metaapi.api.entities.v2.WalletItem;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +20,7 @@ public class PlayerWalletImpl implements PlayerWallet {
 
     @Override
     public List<? extends WalletItem> getEnjinWallet() {
-        return centralizedItems;
+        return itemsInChains.get("enjin");
     }
 
     @Override
