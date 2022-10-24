@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class OAuthToken implements TokenHandler {
@@ -17,13 +18,16 @@ public class OAuthToken implements TokenHandler {
 
     private final String clientId;
     private final String clientSecret;
+    private final String[] oAuthScopes;
 
     private final String baseAuthUrl;
 
     private OAuthToken(final String clientId, final String clientSecret, final String baseAuthUrl) {
+
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.baseAuthUrl = baseAuthUrl;
+        this.oAuthScopes = new String[] {"wallet.read", "p2e.read", "p2e.add", "linkinglink.create", "linkinglink.read", "linkinglink.implicit"};
 
         this.httpClient = new OkHttpClient();
         this.gson = new Gson();
@@ -55,15 +59,20 @@ public class OAuthToken implements TokenHandler {
         final FormBody.Builder formBody = new FormBody.Builder();
 
         if (withCredentials) {
+
             formBody.add("grant_type", "client_credentials");
             formBody.add("client_id", this.clientId);
             formBody.add("client_secret", this.clientSecret);
+            formBody.add("scope", this.getOAuthScopesAsString());
+
         } else {
+
             if (this.refreshToken == null)
                 throw new NullPointerException("Refresh token is not available, try first with credentials.");
 
             formBody.add("grant_type", "refresh_token");
             formBody.add("refresh_token", this.refreshToken);
+
         }
 
         builder.url(urlBuilder.build());
@@ -104,6 +113,19 @@ public class OAuthToken implements TokenHandler {
         if (shouldUpdateToken())
             this.requestToken(false);
         return accessToken;
+    }
+
+    public String getOAuthScopesAsString() {
+
+        StringBuilder oAuthScopesStringBuilder = new StringBuilder();
+
+        Arrays.stream(this.oAuthScopes).forEach(scope -> {
+            oAuthScopesStringBuilder.append(scope);
+            oAuthScopesStringBuilder.append(" ");
+        });
+
+        return oAuthScopesStringBuilder.toString();
+
     }
 
     @Override
