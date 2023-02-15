@@ -1,6 +1,6 @@
 package io.mymetavese.metaapi.requests.entities.p2e;
 
-import io.mymetavese.metaapi.api.entities.p2e.P2EResponse;
+import io.mymetavese.metaapi.api.entities.p2e.P2EProfileId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +10,9 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class P2EResponseImpl implements P2EResponse {
+public class P2EProfileIdImpl implements P2EProfileId {
 
-    private final P2EProfileIdImpl profileId;
-    private final int balance;
+    private final String id;
+    private final String net;
 
 }
