@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - master
+      - config/ci_cd_workflow
 
 jobs:
   build:
