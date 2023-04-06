@@ -24,7 +24,13 @@ public enum Routes {
 
     GIVE_WHITELISTED_TOKEN,
 
+    // Play2Earn Routes
     GET_P2E_POINTS,
-    ADD_P2E_POINTS
+    ADD_P2E_POINTS,
+
+    // MetaDrops Routes
+    GET_ALL_DROPS,
+    GET_DROP,
+    CONSUME_DROP
 
 }
