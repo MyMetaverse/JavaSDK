@@ -1,5 +1,6 @@
 package io.mymetavese.metaapi.api.entities.drops;
 
+import io.mymetavese.metaapi.api.entities.drops.constraints.DropConstraint;
 import io.mymetavese.metaapi.api.entities.drops.requirements.DropEntryRequirement;
 
 import java.util.List;

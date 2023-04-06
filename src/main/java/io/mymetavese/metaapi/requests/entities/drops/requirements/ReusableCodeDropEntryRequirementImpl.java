@@ -22,4 +22,5 @@ public class ReusableCodeDropEntryRequirementImpl implements ReusableCodeDropEnt
         thisAsJson.addProperty("reusableCode", this.reusableCode);
         return thisAsJson;
     }
+
 }
