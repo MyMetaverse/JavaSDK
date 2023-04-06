@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.mymetaverse</groupId>
-  <artifactId>metaapi</artifactId>
-  <version>2.3.1</version>
+  <groupId>io.mymetaverse.sdk</groupId>
+  <artifactId>java-sdk</artifactId>
+  <version>2.4.0</version>
   <build>
     <defaultGoal>package install</defaultGoal>
     <finalName>${project.name}-${project.version}</finalName>
@@ -56,12 +56,12 @@
   <distributionManagement>
     <repository>
       <id>github</id>
-      <name>GitHub MyMetaverse Apache Maven Packages</name>
+      <name>GitHub MyMetaverse JavaSDK Maven Packages</name>
       <url>https://maven.pkg.github.com/MyMetaverse/JavaSDK</url>
     </repository>
   </distributionManagement>
   <properties>
-    <maven.compiler.target>8</maven.compiler.target>
     <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
   </properties>
 </project>
