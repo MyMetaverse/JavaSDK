@@ -36,6 +36,10 @@ public class V2 extends RouteAdapter {
         this.routes.put("GET_P2E_POINTS", new Route(GET, "/users/{userId}/p2e/points"));
         this.routes.put("ADD_P2E_POINTS", new Route(POST, "/users/{userId}/p2e/points"));
 
+        this.routes.put("GET_ALL_DROPS", new Route(GET, "/metadrops"));
+        this.routes.put("GET_DROP", new Route(GET, "/metadrops/{dropId}"));
+        this.routes.put("CONSUME_DROP", new Route(POST, "/metadrops/{dropId}/consume"));
+
     }
 
 }

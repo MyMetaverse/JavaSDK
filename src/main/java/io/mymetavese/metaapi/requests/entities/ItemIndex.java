@@ -3,11 +3,13 @@ package io.mymetavese.metaapi.requests.entities;
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.Metadata.UpdateTokenAchievementsAction;
 import io.mymetavese.metaapi.requests.actions.Metadata.UpdateTokenAchievementsActionImpl;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
+@EqualsAndHashCode
 public class ItemIndex {
 
     @Getter

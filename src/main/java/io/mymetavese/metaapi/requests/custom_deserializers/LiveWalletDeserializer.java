@@ -1,4 +1,4 @@
-package io.mymetavese.metaapi.requests.CustomDeserializers;
+package io.mymetavese.metaapi.requests.custom_deserializers;
 
 import com.google.gson.*;
 import io.mymetavese.metaapi.requests.entities.ItemIndex;
