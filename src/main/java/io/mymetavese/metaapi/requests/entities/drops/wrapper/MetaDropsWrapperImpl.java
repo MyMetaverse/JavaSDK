@@ -25,15 +25,15 @@ public class MetaDropsWrapperImpl implements MetaDropsWrapper {
     }
 
     public GetAllDropsAction getAllDrops() {
-        return new GetAllDropsActionImpl(metaAPI);
+        return new GetAllDropsActionImpl(this.metaAPI);
     }
 
     public GetDropAction getDropById(String dropId) {
-        return new GetDropActionImpl(metaAPI, dropId);
+        return new GetDropActionImpl(this.metaAPI, dropId);
     }
 
     public ConsumeDropAction consumeDrop(String dropId, GameEntity dropReceiver, List<DropEntryRequirement> dropEntryRequirements) {
-        return new ConsumeDropActionImpl(metaAPI, dropId, dropReceiver, dropEntryRequirements);
+        return new ConsumeDropActionImpl(this.metaAPI, dropId, dropReceiver, dropEntryRequirements);
     }
 
 }

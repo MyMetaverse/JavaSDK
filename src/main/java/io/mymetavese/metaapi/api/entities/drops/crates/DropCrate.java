@@ -1,6 +1,6 @@
-package io.mymetavese.metaapi.api.entities.drops;
+package io.mymetavese.metaapi.api.entities.drops.crates;
 
-import io.mymetavese.metaapi.api.entities.Item;
+import io.mymetavese.metaapi.requests.entities.drops.crates.DropCrateItemImpl;
 
 import java.util.List;
 
@@ -38,9 +38,10 @@ public interface DropCrate {
      * Get the tokens available in this crate
      * <p>
      * Get the tokens (its Ids and Indexes) available in this crate.
+     *
      * @return The tokens available in this crate
      */
-    List<Item> getTokensInCrate();
+    List<DropCrateItemImpl> getTokensInCrate();
 
     /**
      * Get the type of this crate

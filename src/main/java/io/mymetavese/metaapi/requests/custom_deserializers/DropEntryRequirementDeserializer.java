@@ -22,13 +22,13 @@ public class DropEntryRequirementDeserializer implements JsonDeserializer<Object
 
             if (jsonObject.get("reusableCode").isJsonPrimitive())
                 return new ReusableCodeDropEntryRequirementImpl(jsonObject.get("reusableCode").getAsString());
-            throw new JsonParseException("Expecting 'reusableCode' value to be a String, but it wasn't...");
+            return new ReusableCodeDropEntryRequirementImpl(null);
 
         } else if (jsonObject.has("code")) {
 
             if (jsonObject.get("code").isJsonPrimitive() && jsonObject.get("code").getAsJsonPrimitive().isString())
                 return new SingleCodeDropEntryRequirementImpl(jsonObject.get("code").getAsString());
-            throw new JsonParseException("Expecting 'code' value to be a String, but it wasn't...");
+            return new SingleCodeDropEntryRequirementImpl(null);
 
         }
 

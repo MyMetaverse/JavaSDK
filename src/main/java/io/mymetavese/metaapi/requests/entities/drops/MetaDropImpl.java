@@ -3,6 +3,7 @@ package io.mymetavese.metaapi.requests.entities.drops;
 import io.mymetavese.metaapi.api.entities.drops.constraints.DropConstraint;
 import io.mymetavese.metaapi.api.entities.drops.MetaDrop;
 import io.mymetavese.metaapi.api.entities.drops.requirements.DropEntryRequirement;
+import io.mymetavese.metaapi.requests.entities.drops.crates.DropCrateImpl;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,9 @@ public class MetaDropImpl implements MetaDrop {
     private final String description;
     private final String slug;
     private final String creatorId;
-    private final List<DropEntryRequirement> entryRequirements;
     private final List<DropConstraint> constraints;
+    private final List<DropCrateImpl> crates;
+    private final List<DropEntryRequirement> entryRequirements;
 
     @Override
     public String toString() {

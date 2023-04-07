@@ -1,6 +1,6 @@
-package io.mymetavese.metaapi.requests.entities.drops;
+package io.mymetavese.metaapi.requests.entities.drops.crates;
 
-import io.mymetavese.metaapi.api.entities.drops.DropCrateType;
+import io.mymetavese.metaapi.api.entities.drops.crates.DropCrateType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
