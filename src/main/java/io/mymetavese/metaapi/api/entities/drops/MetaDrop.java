@@ -2,6 +2,7 @@ package io.mymetavese.metaapi.api.entities.drops;
 
 import io.mymetavese.metaapi.api.entities.drops.constraints.DropConstraint;
 import io.mymetavese.metaapi.api.entities.drops.requirements.DropEntryRequirement;
+import io.mymetavese.metaapi.requests.entities.drops.crates.DropCrateImpl;
 
 import java.util.List;
 
@@ -13,11 +14,11 @@ public interface MetaDrop {
     String getSlug();
     String getCreatorId();
 
-    List<DropEntryRequirement> getEntryRequirements();
-
     List<DropConstraint> getConstraints();
 
+    List<DropCrateImpl> getCrates();
 
+    List<DropEntryRequirement> getEntryRequirements();
 
 }
 
