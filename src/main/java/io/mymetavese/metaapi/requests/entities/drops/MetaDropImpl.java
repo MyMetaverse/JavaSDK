@@ -34,6 +34,7 @@ public class MetaDropImpl implements MetaDrop {
                 ", creatorId='" + creatorId + '\'' +
                 ", entryRequirements=" + entryRequirements +
                 ", constraints=" + constraints +
+                ", crates=" + crates +
                 '}';
     }
 
