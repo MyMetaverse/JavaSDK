@@ -4,6 +4,6 @@ public interface TokenHandler {
 
     String getToken();
 
-    void reauthenticate();
+    void authenticate();
 
 }

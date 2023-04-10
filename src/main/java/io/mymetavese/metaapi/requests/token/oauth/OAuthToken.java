@@ -52,9 +52,13 @@ public interface OAuthToken extends TokenHandler {
         }
 
         public OAuthTokenImpl build() {
-            OAuthTokenImpl builtToken = new OAuthTokenImpl(clientID, clientSecret, authenticationAddress, scopes);
-            builtToken.reauthenticate();
-            return builtToken;
+            return new OAuthTokenImpl(clientID, clientSecret, authenticationAddress, scopes);
+        }
+
+        public OAuthTokenImpl buildAuthenticated() {
+            OAuthTokenImpl oAuthToken = new OAuthTokenImpl(clientID, clientSecret, authenticationAddress, scopes);
+            oAuthToken.authenticate();
+            return oAuthToken;
         }
 
     }

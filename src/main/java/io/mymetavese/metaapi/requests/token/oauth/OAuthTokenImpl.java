@@ -114,7 +114,7 @@ public class OAuthTokenImpl implements OAuthToken {
     }
 
     @Override
-    public void reauthenticate() {
+    public void authenticate() {
         this.requestToken(true);
     }
 
