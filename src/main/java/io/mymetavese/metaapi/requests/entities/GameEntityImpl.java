@@ -2,12 +2,15 @@ package io.mymetavese.metaapi.requests.entities;
 
 import io.mymetavese.metaapi.api.MetaAPI;
 import io.mymetavese.metaapi.api.actions.*;
+import io.mymetavese.metaapi.api.actions.drops.ConsumeDropAction;
 import io.mymetavese.metaapi.api.actions.p2e.AddP2EPointsAction;
 import io.mymetavese.metaapi.api.actions.p2e.GetP2EPointsAction;
 import io.mymetavese.metaapi.api.actions.v2.GetTransferableItems;
 import io.mymetavese.metaapi.api.entities.Item;
+import io.mymetavese.metaapi.api.entities.drops.requirements.DropEntryRequirement;
 import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.requests.actions.*;
+import io.mymetavese.metaapi.requests.actions.drops.ConsumeDropActionImpl;
 import io.mymetavese.metaapi.requests.actions.p2e.AddP2EPointsActionImpl;
 import io.mymetavese.metaapi.requests.actions.p2e.GetP2EPointsActionImpl;
 import io.mymetavese.metaapi.requests.actions.v2.GetTransferableItemsImpl;
@@ -75,6 +78,10 @@ public class GameEntityImpl implements GameEntity {
     @Override
     public AddP2EPointsAction addP2EPoints(int points, String idempotencyKey) {
         return new AddP2EPointsActionImpl(metaAPI, this, points, idempotencyKey);
+    }
+
+    public ConsumeDropAction consumeDrop(String dropId, List<DropEntryRequirement> dropEntryRequirements) {
+        return new ConsumeDropActionImpl(metaAPI, dropId, this, dropEntryRequirements);
     }
     
 }
