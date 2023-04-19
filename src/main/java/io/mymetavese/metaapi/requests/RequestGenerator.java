@@ -61,7 +61,7 @@ public class RequestGenerator {
 
             if(response.code() == 401 && request.getAttempts() < 2) {
                 request.addAttempt();
-                api.getTokenHandler().reauthenticate();
+                api.getTokenHandler().authenticate();
                 this.request(request);
                 return;
             }
