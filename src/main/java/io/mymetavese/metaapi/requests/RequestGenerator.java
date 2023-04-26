@@ -8,7 +8,6 @@ import okhttp3.Response;
 import okhttp3.internal.http.HttpMethod;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class RequestGenerator {
 
@@ -29,6 +28,7 @@ public class RequestGenerator {
     }
 
     public void request(Request<?> request) {
+
         String route = request.getCompiledRoute();
 
         okhttp3.Request.Builder builder = new okhttp3.Request.Builder();
@@ -52,28 +52,29 @@ public class RequestGenerator {
         if (request.getHeaders() != null && !request.getHeaders().isEmpty())
             request.getHeaders().forEach(builder::addHeader);
 
-            // Maybe should add attempts here.
 
-        try(Response response = httpClient.newCall(builder.build()).execute()) {
+        try (Response response = httpClient.newCall(builder.build()).execute()) {
+
             if (response.code() >= 500) {
-                throw new IOException("Internal server error: " + Objects.requireNonNull(response.body()).string());
+                String responseBodyString = response.peekBody(Long.MAX_VALUE).string();
+                request.handleResponse(response);
+                throw new IOException("Internal server error: " + responseBodyString);
             }
 
-            if(response.code() == 401 && request.getAttempts() < 2) {
+            // Try to Re-authenticate if the token is invalid and the re-authentication has not been attempted for more
+            // than 2 times.
+            if (response.code() == 401 && request.getAttempts() < 2) {
+
                 request.addAttempt();
                 api.getTokenHandler().authenticate();
                 this.request(request);
-                return;
+
+            } else {
+                request.handleResponse(response);
             }
 
-            request.handleResponse(response);
         } catch (IOException ex) {
             ex.printStackTrace();
-
-            if(request.getAttempts() < 2) {
-                request.addAttempt();
-                this.request(request);
-            }
         }
 
     }
