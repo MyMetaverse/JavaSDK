@@ -1,14 +1,14 @@
 package io.mymetavese.metaapi.requests.actions;
 
 import io.mymetavese.metaapi.api.MetaAPI;
-import io.mymetavese.metaapi.api.actions.GetLinkingLink;
+import io.mymetavese.metaapi.api.actions.GetLinkingLinkAction;
 import io.mymetavese.metaapi.api.entities.v2.GameEntity;
 import io.mymetavese.metaapi.api.entities.LinkingLink;
 import io.mymetavese.metaapi.requests.RestActionImpl;
 import io.mymetavese.metaapi.requests.entities.LinkingLinkImpl;
 import io.mymetavese.metaapi.requests.routes.Routes;
 
-public class GetLinkingLinkActionImpl extends RestActionImpl<LinkingLink> implements GetLinkingLink {
+public class GetLinkingLinkActionImpl extends RestActionImpl<LinkingLink> implements GetLinkingLinkAction {
 
     private final GameEntity gameEntity;
 
