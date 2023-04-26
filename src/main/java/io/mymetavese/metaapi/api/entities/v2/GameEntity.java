@@ -59,7 +59,7 @@ public interface GameEntity extends ApiEntity {
      *
      * @return An action that represents the linking link.
      */
-    GetLinkingLink getLinkingLink();
+    GetLinkingLinkAction getLinkingLink();
 
     /**
      * Get the currently active metacitizen for this game entity.
