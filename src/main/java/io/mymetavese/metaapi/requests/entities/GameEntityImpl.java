@@ -56,7 +56,7 @@ public class GameEntityImpl implements GameEntity {
     }
 
     @Override
-    public GetLinkingLink getLinkingLink() {
+    public GetLinkingLinkAction getLinkingLink() {
         return new GetLinkingLinkActionImpl(metaAPI, this);
     }
 
