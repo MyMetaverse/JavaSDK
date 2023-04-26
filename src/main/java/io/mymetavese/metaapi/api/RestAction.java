@@ -3,7 +3,9 @@ package io.mymetavese.metaapi.api;
 import io.mymetavese.metaapi.MetaAPIImpl;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
 public interface RestAction<T> {
@@ -23,7 +25,6 @@ public interface RestAction<T> {
     /**
      * Submits a request for execution in asynchronous logic.
      *
-     *
      * @param success The success callback from the request.
      * @param failure The callback error from the request.
      */
@@ -31,7 +32,6 @@ public interface RestAction<T> {
 
     /**
      * Submits a request for execution in asynchronous logic.
-     *
      *
      * @param success The success callback from the request.
      */
@@ -45,6 +45,13 @@ public interface RestAction<T> {
      * @return The response of the Request.
      */
     T complete();
+
+    /**
+     * Submits a Request in synchronous logic with a Timeout
+     *
+     * @return The response of the Request.
+     */
+    T complete(long timeout, TimeUnit timeUnit) throws ExecutionException, InterruptedException, TimeoutException;
 
     /**
      * Submits a request for execution after some time delay.

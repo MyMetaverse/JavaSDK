@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
 public abstract class RestActionImpl<T> extends Transformable<T> implements RestAction<T> {
@@ -104,5 +107,11 @@ public abstract class RestActionImpl<T> extends Transformable<T> implements Rest
     public T complete() {
         return submit().join();
     }
+
+    @Override
+    public T complete(long timeout, TimeUnit timeUnit) throws ExecutionException, InterruptedException, TimeoutException {
+        return submit().get(timeout, timeUnit);
+    }
+
 }
 
